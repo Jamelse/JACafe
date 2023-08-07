@@ -1,0 +1,2 @@
+module CoffeeDetailsHelper
+end

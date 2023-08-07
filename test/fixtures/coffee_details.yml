@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  coffee_id: 1
+  size: MyString
+  espresso_shots: 1
+  milk: MyString
+  syrup: MyString
+  syrup_pumps: 1
+
+two:
+  coffee_id: 1
+  size: MyString
+  espresso_shots: 1
+  milk: MyString
+  syrup: MyString
+  syrup_pumps: 1

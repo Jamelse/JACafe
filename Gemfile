@@ -61,3 +61,11 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem 'bcrypt'
+
+gem "active_model_serializers", "~> 0.10.12"
+
+gem 'stripe'
+
+gem 'net-http'
