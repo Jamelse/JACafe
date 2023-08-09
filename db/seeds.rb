@@ -14,3 +14,22 @@ User.create(
   password_confirmation: 'adminpassword',
   isAdmin: true
 )
+
+Coffee.create!([
+  {
+    name: 'Caffè Latte',
+    price: 4.79,
+    image: 'https://www.foodandwine.com/thmb/CCe2JUHfjCQ44L0YTbCu97ukUzA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Partners-Latte-FT-BLOG0523-09569880de524fe487831d95184495cc.jpg',
+    description: 'Our dark, rich espresso balanced with steamed milk and a light layer of foam. A perfect milk-forward warm-up.',
+    calories: 190,
+    hot: true
+  }
+])
+
+CoffeeDetail.create(
+  coffee_id: 1,
+  espresso_shots: 1,
+  milk: '2%',
+  syrup: nil,
+  syrup_pumps: nil
+)
