@@ -14,29 +14,31 @@ class CartsController < ApplicationController
 
   def update 
     coffee = Coffee.find_by(id: params[:coffee_id])
-    cartI = @cart.cart_items.find_by(coffee_id: coffee.id)
-      if cartI
-        cartI.update!(quantity: params[:quantity] + cartI.quantity)
-      else 
+     cartI = @cart.cart_items.find_by(coffee_id: coffee.id)
+       if cartI
+         cartI.update!(quantity: params[:quantity] + cartI.quantity)
+       else 
         @cart.cart_items.create!(quantity: params[:quantity], coffee_id: coffee.id)
-      end
+       end
       render json: @cart, status: :accepted
   end
 
   def new_quantity 
-    find_cart_item.update!(quantity: params[:quantity])
+    item = find_cart_item
+    item.update!(quantity: params[:quantity])
     render json: @cart, status: :accepted
   end
 
   def destroy
-    find_cart_item.destroy
-    render json: {}
+    item = find_cart_item
+    item.destroy
+    render json: @cart
   end
 
   private
   
   def set_cart 
-    @cart = Cart.find_by(id: session[:cart_id])
+    @cart = Cart.find(params[:id])
   end
 
   def find_cart_item
