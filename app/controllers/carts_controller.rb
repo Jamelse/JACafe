@@ -29,7 +29,7 @@ class CartsController < ApplicationController
     render json: @cart, status: :accepted
   end
 
-  def destroy
+  def delete_item
     item = find_cart_item
     item.destroy
     render json: @cart
@@ -42,6 +42,6 @@ class CartsController < ApplicationController
   end
 
   def find_cart_item
-   @cart.cart_items.find_by(id: params[:cart_item_id]) 
+   @cart.cart_items.find(params[:id]) 
   end
 end
