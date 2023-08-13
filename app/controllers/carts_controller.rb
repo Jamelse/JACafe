@@ -1,5 +1,5 @@
 class CartsController < ApplicationController
-  before_action :set_cart
+  before_action :set_cart, only: [:update, :new_quantity, :delete_item]
 
   def show 
     if session.include? :cart_id

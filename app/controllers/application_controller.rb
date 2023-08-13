@@ -2,12 +2,18 @@ class ApplicationController < ActionController::Base
   include ActionController::Cookies
 
   protect_from_forgery with: :null_session
+
+  before_action :authorize_user
   
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
   private 
+
+  def authorize_user 
+    @current_user = User.find_by(id: session[:user_id])
+  end
 
   def render_not_found_response(exception)
     render json: { error: "#{exception.model} not found" }, status: :not_found
