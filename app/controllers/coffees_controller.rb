@@ -25,16 +25,6 @@ class CoffeesController < ApplicationController
     render json: {}
   end
 
-  def update_details
-    @coffee.coffee_detail.first.update!(detail_params)
-    render json: @coffee, status: :accepted
-   end
-
-   def create_detail
-    @coffee.coffee_detail.create!(detail_params)
-    render json: @coffee, status: :accepted
-  end
-
   private
 
   def find_coffee
@@ -43,10 +33,6 @@ class CoffeesController < ApplicationController
 
   def coffee_params
     params.permit(:name, :price, :image, :description, :calories, :hot)
-  end
-
-  def detail_params
-    params.permit(:espresso_shots, :milk, :syrup, :syrup_pumps)
   end
 
 end
