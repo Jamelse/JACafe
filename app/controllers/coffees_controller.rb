@@ -1,13 +1,14 @@
 class CoffeesController < ApplicationController
 
-  before_action :find_coffee
+  before_action :find_coffee, only: [:create, :show, :update, :destroy]
+  before_action :admin_authorization, only: [:create, :update, :destroy]
 
   def index
     render json: Coffee.all
   end
 
   def show 
-    render json: @coffee
+    render json: @coffee, include: @current_user
   end
 
   def create 
@@ -26,6 +27,10 @@ class CoffeesController < ApplicationController
   end
 
   private
+
+  def admin_authorization
+    render json: { errors: [ "Not Authorized" ] }, status: :unauthorized unless @current_user.isAdmin?
+  end
 
   def find_coffee
     @coffee = Coffee.find(params[:id])
