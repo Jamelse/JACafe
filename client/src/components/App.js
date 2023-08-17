@@ -5,6 +5,7 @@ import LoginForm from './LoginForm';
 import Home from './Home';
 import EditCoffeeForm from  './EditCoffeeForm'
 import Dashboard from './Dashboard';
+import CoffeeDetailPage from './CoffeeDetailPage';
 
 function App() {
 const {user, setUser, isAdmin, setIsAdmin} = useContext(UserContext);
@@ -51,7 +52,8 @@ console.log(cart)
       <Routes>
       <Route path='/' element={<Home coffees={coffees}/> }></Route>
       <Route path='/login' element={ <LoginForm /> }></Route>
-      <Route path='/coffees/:id' element={<EditCoffeeForm  handleSetCoffees={ handleSetCoffees }/>}></Route>
+      <Route path='/coffees/:id/edit' element={<EditCoffeeForm  handleSetCoffees={ handleSetCoffees }/>}></Route>
+      <Route path='/coffees/:id' element={<CoffeeDetailPage cart={cart} setCart={setCart}/>}></Route>
     </Routes>
     }
       
