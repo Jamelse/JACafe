@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :carts, only: :update
+  get '/cart', to: 'carts#show'
   patch '/carts/:id/new_quantity', to: 'carts#new_quantity'
   patch '/carts/:id/delete_item', to: 'carts#delete_item'
   resources :orders, only: [:index, :update, :create]

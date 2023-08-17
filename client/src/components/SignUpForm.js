@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from './UserProvider';
 
 function SignUpForm(){
-  const {setUser} = useContext(UserContext);
+  const {setUser, setIsAdmin} = useContext(UserContext);
   const [signUpData, setSignUpData] = useState({
     first_name: '',
     last_name: '',
@@ -35,7 +35,9 @@ function SignUpForm(){
     }).then((r) => {
       if (r.ok) {
         r.json()
-        .then((user) => {setUser(user)
+        .then((user) => {
+          setUser(user);
+          setIsAdmin(user.isAdmin)
           navigate("/")});
       } else {
         r.json()

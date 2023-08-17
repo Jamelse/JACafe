@@ -38,7 +38,7 @@ class CartsController < ApplicationController
   private
   
   def set_cart 
-    @cart = Cart.find(params[:id])
+    @cart = Cart.find_by(id: session[:cart_id])
   end
 
   def find_cart_item
