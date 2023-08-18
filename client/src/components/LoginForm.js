@@ -35,7 +35,8 @@ function LoginForm(){
         .then((user) => {
           setUser(user);
           setIsAdmin(user.isAdmin);
-          navigate("/")});
+          user.isAdmin ? navigate('/dashboard') : navigate('/')
+          });
       } else {
         r.json()
         .then((err) => setErrors(err.errors))

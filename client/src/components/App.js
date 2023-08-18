@@ -6,6 +6,7 @@ import Home from './Home';
 import EditCoffeeForm from  './EditCoffeeForm'
 import Dashboard from './Dashboard';
 import CoffeeDetailPage from './CoffeeDetailPage';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
 const {user, setUser, isAdmin, setIsAdmin} = useContext(UserContext);
@@ -48,15 +49,25 @@ console.log(cart)
   return (
     <div className="App">
       <button onClick={handleLogout}>Logout</button>
-      {isAdmin ? <Dashboard /> : 
       <Routes>
-      <Route path='/' element={<Home coffees={coffees}/> }></Route>
-      <Route path='/login' element={ <LoginForm /> }></Route>
-      <Route path='/coffees/:id/edit' element={<EditCoffeeForm  handleSetCoffees={ handleSetCoffees }/>}></Route>
-      <Route path='/coffees/:id' element={<CoffeeDetailPage cart={cart} setCart={setCart}/>}></Route>
+      <Route index element={<Home coffees={coffees}/> }></Route>
+      <Route path='home' element={<Home coffees={coffees}/>}></Route>
+      <Route path='login' element={ <LoginForm /> }></Route>
+      <Route path='coffees/:id' element={<CoffeeDetailPage cart={cart} setCart={setCart}/>}></Route>
+      <Route path="dashboard" element={
+            <ProtectedRoute
+              redirectPath="/home"
+              isAllowed={!!user && isAdmin}>
+              <Dashboard coffees={coffees}/>
+            </ProtectedRoute>}/>
+      <Route path="coffees/:id/edit" element={
+            <ProtectedRoute
+              redirectPath="/home"
+              isAllowed={!!user && isAdmin}>
+              <EditCoffeeForm  handleSetCoffees={ handleSetCoffees }/>
+            </ProtectedRoute>}/>
+        <Route path="*" element={<p>There's nothing here: 404!</p>} />
     </Routes>
-    }
-      
     </div>
   );
 }

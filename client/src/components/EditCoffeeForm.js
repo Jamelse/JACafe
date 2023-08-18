@@ -72,7 +72,7 @@ function EditCoffeeForm({ handleSetCoffees }){
       </div>
       <button type="submit">Submit</button>
       </form>
-      <button className="cancelButton" onClick={() => navigate("/")}>Cancel</button>
+      <button className="cancelButton" onClick={() => navigate(-1)}>Cancel</button>
       </div> : <h1>Loading...</h1>}
     </div>
   )

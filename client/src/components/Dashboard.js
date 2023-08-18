@@ -1,8 +1,20 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function Dashboard(){
+function Dashboard({coffees}){
+  const navigate = useNavigate();
   return (
-    <h1>Admin Dashboard</h1>
+    <div>
+      <button>Add Coffee</button>
+      {coffees ? coffees.map((coffee) => {
+        return (
+          <div key={coffee.id}>
+            <p>{coffee.name}</p>
+            <button onClick={() => navigate(`/coffees/${coffee.id}/edit`)}>Edit</button>
+          </div>
+        )
+      }) : <h1>Loading...</h1>}
+    </div>
   );
 }
 
