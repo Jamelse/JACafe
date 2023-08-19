@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext} from 'react';
 import { UserContext } from './UserProvider';
 import {Route, Routes, useNavigate} from 'react-router-dom';
+import NavBar from './NavBar';
 import ProtectedRoute from './ProtectedRoute';
-import LoginForm from './LoginForm';
+import LoginSignUpPage from './LoginSignUpPage';
 import Home from './Home';
 import EditCoffeeForm from  './EditCoffeeForm'
 import Dashboard from './Dashboard';
@@ -41,18 +42,6 @@ function handleSetCoffeeDetail(newDetail){
   setCoffees(updatedCoffees)
 };
 
-function handleLogout(){
-  fetch("/logout", {
-    method: "DELETE"
-  })
-  .then((r) => {
-    if (r.ok){
-      setUser(null);
-      setIsAdmin(false);
-      navigate('/');
-    }
-  });
-};
 
 function handleSetCoffees(newCoffee){
   setCoffees([...coffees, newCoffee]);
@@ -60,12 +49,16 @@ function handleSetCoffees(newCoffee){
 
   return (
     <div className="App">
-      <button onClick={handleLogout}>Logout</button>
-      {isAdmin ? <button onClick={() => navigate('/dashboard')}>Admin Dashboard</button> : <button>Cart</button>}
+      <NavBar />
       <Routes>
       <Route index element={<Home coffees={coffees}/> }></Route>
       <Route path='home' element={<Home coffees={coffees}/>}></Route>
-      <Route path='login' element={ <LoginForm /> }></Route>
+      <Route path='login' element={ 
+            <ProtectedRoute
+              redirectPath="/home"
+              isAllowed={!user}>
+              <LoginSignUpPage />
+            </ProtectedRoute>}/>
       <Route path='coffees/:id' element={<CoffeeDetailPage cart={cart} setCart={setCart}/>}></Route>
       <Route path="dashboard" element={
             <ProtectedRoute

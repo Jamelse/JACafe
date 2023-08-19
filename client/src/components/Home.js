@@ -8,7 +8,6 @@ function Home({ coffees }){
 
   return (
    <div>
-    <LoginForm />
        {coffees ? coffees.map(coffee => {
         return (
           <div key={coffee.id}>
@@ -17,11 +16,9 @@ function Home({ coffees }){
             <p>{coffee.name}</p>
             <p>{coffee.price}</p>
             </div>
-            <button onClick={() => navigate(`/coffees/${coffee.id}/edit`)}>Edit</button>
             </div>)
        }
         ) : "Loading.."} 
-        <SignUpForm />
    </div>
   );
 }

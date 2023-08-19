@@ -1,11 +1,19 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { UserContext } from './UserProvider';
+import React from 'react';
+import LoginForm from './LoginForm';
+import SignUpForm from './SignUpForm';
+
 
 function LoginSignUpPage(){
   return (
-    <h1></h1>
-  )
-}
+    <div>
+      <div>
+        <LoginForm />
+      </div>
+      <div>
+        <SignUpForm />
+      </div>
+    </div>
+  );
+};
 
 export default LoginSignUpPage
