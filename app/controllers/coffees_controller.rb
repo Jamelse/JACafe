@@ -1,19 +1,18 @@
 class CoffeesController < ApplicationController
-
-  before_action :find_coffee, only: [:create, :show, :update, :destroy]
-  before_action :admin_authorization, only: [:create, :update, :destroy]
+  skip_before_action :authorize_user, only: :create
+  before_action :find_coffee, only: [:show, :update, :destroy]
+  before_action :admin_authorization, only: [:update, :destroy]
 
   def index
     render json: Coffee.all
   end
 
   def show 
-    render json: @coffee, include: @current_user
+    render json: @coffee
   end
 
   def create 
-    new_coffee = Coffee.create!(coffee_params)
-    render json: new_coffee, status: :created
+    render json: Coffee.create!(coffee_params), status: :created
   end
 
   def update

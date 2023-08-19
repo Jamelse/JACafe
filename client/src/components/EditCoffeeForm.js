@@ -35,9 +35,9 @@ function EditCoffeeForm({ handleSetCoffees }){
     .then((r) => {
       if (r.ok){
         r.json()
-        .then(updatedCoffees => {
-          handleSetCoffees(updatedCoffees)
-          navigate("/")})
+        .then(updatedCoffee => {
+          handleSetCoffees(updatedCoffee)
+          navigate("/dashboard")})
       } else {
         r.json()
         .then((err) => setErrors(err.errors));

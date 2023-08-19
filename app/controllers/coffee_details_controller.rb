@@ -1,5 +1,5 @@
 class CoffeeDetailsController < ApplicationController
-  before_action :find_coffee
+  before_action :find_coffee, only: [:update]
   before_action :admin_authorization
 
   def update
@@ -8,8 +8,7 @@ class CoffeeDetailsController < ApplicationController
    end
 
    def create
-    @coffee.coffee_detail.create!(detail_params)
-    render json: @coffee, status: :accepted
+    render json: CoffeeDetail.create!(detail_params), status: :accepted
   end
 
   private
@@ -19,7 +18,7 @@ class CoffeeDetailsController < ApplicationController
   end
 
   def detail_params
-    params.permit(:espresso_shots, :milk, :syrup, :syrup_pumps)
+    params.permit(:coffee_id, :espresso_shots, :milk, :syrup, :syrup_pumps)
   end
 
   def admin_authorization

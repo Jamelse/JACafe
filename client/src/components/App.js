@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext} from 'react';
 import { UserContext } from './UserProvider';
 import {Route, Routes, useNavigate} from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute';
 import LoginForm from './LoginForm';
 import Home from './Home';
 import EditCoffeeForm from  './EditCoffeeForm'
 import Dashboard from './Dashboard';
 import CoffeeDetailPage from './CoffeeDetailPage';
-import ProtectedRoute from './ProtectedRoute';
+import NewCoffeeForm from './NewCoffeeForm';
 
 function App() {
 const {user, setUser, isAdmin, setIsAdmin} = useContext(UserContext);
@@ -24,9 +25,20 @@ useEffect(() => {
   .then(cart => setCart(cart))
 }, []);
 
-function handleSetCoffees(updatedCoffee){
+function handleUpdateCoffees(updatedCoffee){
   setCoffees(coffees.map(
     coffee => coffee.id === updatedCoffee.id ? updatedCoffee : coffee))
+}
+
+function handleSetCoffeeDetail(newDetail){
+  const updatedCoffees = coffees.map(coffee => {
+    if (coffee.id === newDetail.coffee_id){
+      return {...coffee, coffee_detail: newDetail}
+    } else {
+      return coffee 
+    }
+  })
+  setCoffees(updatedCoffees)
 }
 
 function handleLogout(){
@@ -42,7 +54,11 @@ function handleLogout(){
   });
 };
 
-console.log(cart)
+function handleSetCoffees(newCoffee){
+  setCoffees([...coffees, newCoffee]);
+}
+
+console.log(coffees)
 
 
 
@@ -57,14 +73,20 @@ console.log(cart)
       <Route path="dashboard" element={
             <ProtectedRoute
               redirectPath="/home"
-              isAllowed={!!user && isAdmin}>
+              isAllowed={!!isAdmin}>
               <Dashboard coffees={coffees}/>
             </ProtectedRoute>}/>
       <Route path="coffees/:id/edit" element={
             <ProtectedRoute
               redirectPath="/home"
-              isAllowed={!!user && isAdmin}>
-              <EditCoffeeForm  handleSetCoffees={ handleSetCoffees }/>
+              isAllowed={!!isAdmin}>
+              <EditCoffeeForm  handleSetCoffees={ handleUpdateCoffees }/>
+            </ProtectedRoute>}/>
+      <Route path="coffees/new" element={
+            <ProtectedRoute
+              redirectPath="/home"
+              isAllowed={!!isAdmin}>
+              <NewCoffeeForm handleSetCoffees={handleSetCoffees} handleSetCoffeeDetail={handleSetCoffeeDetail}/>
             </ProtectedRoute>}/>
         <Route path="*" element={<p>There's nothing here: 404!</p>} />
     </Routes>

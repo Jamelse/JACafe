@@ -5,7 +5,7 @@ function Dashboard({coffees}){
   const navigate = useNavigate();
   return (
     <div>
-      <button>Add Coffee</button>
+      <button onClick={() => navigate('/coffees/new')}>Add Coffee</button>
       {coffees ? coffees.map((coffee) => {
         return (
           <div key={coffee.id}>
