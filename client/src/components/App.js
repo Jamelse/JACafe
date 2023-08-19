@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext} from 'react';
 import { UserContext } from './UserProvider';
-import {Route, Routes, useNavigate} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import NavBar from './NavBar';
 import ProtectedRoute from './ProtectedRoute';
 import LoginSignUpPage from './LoginSignUpPage';
@@ -11,10 +11,9 @@ import CoffeeDetailPage from './CoffeeDetailPage';
 import NewCoffeeForm from './NewCoffeeForm';
 
 function App() {
-const {user, setUser, isAdmin, setIsAdmin} = useContext(UserContext);
+const {user, isAdmin} = useContext(UserContext);
 const [coffees, setCoffees] = useState(null);
 const [cart, setCart] = useState(null);
-const navigate = useNavigate();
 
 useEffect(() => {
   fetch('/coffees')

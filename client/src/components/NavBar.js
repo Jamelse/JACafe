@@ -1,10 +1,11 @@
 import React, { useState, useContext } from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { UserContext } from './UserProvider';
 
 function NavBar(){
-  const {user, setUser, isAdmin} = useContext(UserContext);
+  const {user, setUser, isAdmin, setIsAdmin} = useContext(UserContext);
   const [dropDown, setDropDown] = useState(false);
+  const navigate = useNavigate();
   
   function handleLogout(){
     fetch("/logout", {
@@ -13,6 +14,8 @@ function NavBar(){
     .then((r) => {
       if (r.ok){
         setUser(null);
+        setIsAdmin(false);
+        navigate('/');
       }
     });
   };
