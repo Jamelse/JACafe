@@ -28,7 +28,7 @@ useEffect(() => {
 function handleUpdateCoffees(updatedCoffee){
   setCoffees(coffees.map(
     coffee => coffee.id === updatedCoffee.id ? updatedCoffee : coffee))
-}
+};
 
 function handleSetCoffeeDetail(newDetail){
   const updatedCoffees = coffees.map(coffee => {
@@ -39,7 +39,7 @@ function handleSetCoffeeDetail(newDetail){
     }
   })
   setCoffees(updatedCoffees)
-}
+};
 
 function handleLogout(){
   fetch("/logout", {
@@ -56,15 +56,12 @@ function handleLogout(){
 
 function handleSetCoffees(newCoffee){
   setCoffees([...coffees, newCoffee]);
-}
-
-console.log(coffees)
-
-
+};
 
   return (
     <div className="App">
       <button onClick={handleLogout}>Logout</button>
+      {isAdmin ? <button onClick={() => navigate('/dashboard')}>Admin Dashboard</button> : <button>Cart</button>}
       <Routes>
       <Route index element={<Home coffees={coffees}/> }></Route>
       <Route path='home' element={<Home coffees={coffees}/>}></Route>
@@ -80,7 +77,7 @@ console.log(coffees)
             <ProtectedRoute
               redirectPath="/home"
               isAllowed={!!isAdmin}>
-              <EditCoffeeForm  handleSetCoffees={ handleUpdateCoffees }/>
+              <EditCoffeeForm  handleSetCoffees={handleUpdateCoffees} handleSetCoffeeDetail={handleSetCoffeeDetail}/>
             </ProtectedRoute>}/>
       <Route path="coffees/new" element={
             <ProtectedRoute

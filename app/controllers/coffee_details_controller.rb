@@ -1,10 +1,10 @@
 class CoffeeDetailsController < ApplicationController
-  before_action :find_coffee, only: [:update]
+  before_action :find_detail, only: [:update]
   before_action :admin_authorization
 
   def update
-    @coffee.coffee_detail.first.update!(detail_params)
-    render json: @coffee, status: :accepted
+    @detail.update!(detail_params)
+    render json: @detail, status: :accepted
    end
 
    def create
@@ -13,8 +13,8 @@ class CoffeeDetailsController < ApplicationController
 
   private
 
-  def find_coffee
-    @coffee = Coffee.find(params[:id])
+  def find_detail
+    @detail = CoffeeDetail.find(params[:id])
   end
 
   def detail_params

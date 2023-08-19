@@ -151,6 +151,7 @@ function NewCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail}){
             onChange={handleCoffeeDetailChange}
             value={coffeeDetails.milk} 
             name="milk">
+              <option value='No'>None</option>
               <option value='2%'>2% Milk</option>
               <option value='Fat-free'>Fat-free Milk</option>
               <option value='Whole'>Whole Milk</option>
