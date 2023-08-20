@@ -49,7 +49,7 @@ function handleSetCoffees(newCoffee){
 
   return (
     <div className="App">
-      <NavBar />
+      <NavBar cart={cart}/>
       <Routes>
       <Route index element={<Home coffees={coffees}/> }></Route>
       <Route path='home' element={<Home coffees={coffees}/>}></Route>

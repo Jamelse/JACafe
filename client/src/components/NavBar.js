@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { UserContext } from './UserProvider';
+import CartNav from './CartNav';
 
-function NavBar(){
+function NavBar({cart}){
   const {user, setUser, isAdmin, setIsAdmin} = useContext(UserContext);
   const [dropDown, setDropDown] = useState(false);
   const navigate = useNavigate();
@@ -24,13 +25,8 @@ function NavBar(){
     <div className='navDiv'> 
       <ul>
         <li className='appTitle'><NavLink className='appNavTitle' to="/home">JACafe</NavLink></li>
-        <li>{isAdmin ? <NavLink to="/dashboard">Admin Dashboard</NavLink> : <NavLink to='/cart'>Cart</NavLink>}</li>
-        <li>
-          <p className="navUserName" onClick={() => setDropDown(!dropDown)}>{ !dropDown ? <span>&#x25BE;</span> : <span>&#x25b4;</span>}</p>
-          { dropDown ? <ul className="dropdown">
-            <li className='dropDownList'>{!user ? <NavLink to='/login'>Login/Sign-Up</NavLink>: <NavLink onClick={handleLogout} to='/login' className='dropDownItems'>Logout</NavLink>}</li>
-          </ul> : null}
-        </li>
+        <li className='dropDownList'>{!user ? <NavLink to='/login'>Login/Sign-Up</NavLink>: <NavLink onClick={handleLogout} to='/login' className='dropDownItems'>Logout</NavLink>}</li>
+        <li>{isAdmin ? <NavLink to="/dashboard">Admin Dashboard</NavLink> : <CartNav cart={cart}/>}</li>
       </ul>
     </div>
   )

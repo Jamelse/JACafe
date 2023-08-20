@@ -19,3 +19,18 @@ code {
 .coffeeDisplay:hover {
   cursor: pointer;
 }
+
+.cartPreviewDiv{
+  display: flex;
+  flex-direction: column;
+}
+
+.cartItemDiv {
+  display: flex;
+  flex-direction: row;
+}
+
+.cartItemImg {
+  height: 50px;
+  width: 50px;
+}
