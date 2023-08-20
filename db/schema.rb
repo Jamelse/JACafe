@@ -14,13 +14,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_035158) do
   create_table "cart_items", force: :cascade do |t|
     t.integer "cart_id"
     t.integer "coffee_id"
+    t.integer "order_id"
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "carts", force: :cascade do |t|
-    t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

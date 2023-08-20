@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.permit(:status, :date)
+    params.permit(:status, :date, :cart_id)
   end
 
   def admin_authorization
