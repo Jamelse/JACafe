@@ -35,6 +35,11 @@ class CartsController < ApplicationController
     render json: @cart
   end
 
+  def reset_cart 
+    @cart.cart_items.destroy_all
+    render json: {}, method: :destroy
+  end
+
   private
   
   def set_cart 
