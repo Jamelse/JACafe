@@ -1,8 +1,10 @@
 import React, {useState} from "react";
+import { useNavigate } from "react-router-dom";
 
 function CartNav({cart, setCart}){
   const [dropDown, setDropDown] = useState(false);
-    
+  const navigate = useNavigate();
+
   function handleChange(e) {
     fetch(`/carts/${e.target.name}/new_quantity`, {
       method: "PATCH",
@@ -37,13 +39,17 @@ console.log(cart)
       cart.cart_items.map(item => item.quantity).reduce((a, b)=> a + b, 0) : 0}{ !dropDown ? <span>&#x25BE;</span> : <span>&#x25b4;</span>}</p>
           { dropDown ? 
           <ul className="dropdown">
+            <li><h3>Subtotal</h3></li>
+            <li>${cart.cart_total}</li>
+            <button onClick={() => {navigate('/cart')
+              setDropDown(false)}}>Go to Cart</button>
             {cart && cart.cart_items ? cart.cart_items.map(item => {
               return (
                 <div className="cartItemDiv" key={item.id}>
                   <li>
                     <img className="cartItemImg" src={item.item_summary.image}/>
                     <p>{item.item_summary.name}</p>
-                    <p>{item.item_price}</p>
+                    <p>${item.item_price}</p>
                     <select 
                       name={item.id}
                       onChange={handleChange}
