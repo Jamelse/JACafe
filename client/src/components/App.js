@@ -10,6 +10,7 @@ import Dashboard from './Dashboard';
 import CoffeeDetailPage from './CoffeeDetailPage';
 import NewCoffeeForm from './NewCoffeeForm';
 import Cart from './Cart';
+import Checkout from './Checkout';
 
 function App() {
 const {user, isAdmin} = useContext(UserContext);
@@ -63,7 +64,13 @@ function handleSetCoffees(newCoffee){
               isAllowed={!user}>
               <LoginSignUpPage />
             </ProtectedRoute>}/>
-      <Route path='cart' element={<Cart cart={cart}/>}/>
+      <Route path='checkout' element={ 
+            <ProtectedRoute
+              redirectPath="/login"
+              isAllowed={user && !isAdmin}>
+              <Checkout />
+            </ProtectedRoute>}/>
+      <Route path='cart' element={<Cart cart={cart} setCart={setCart}/>}/>
       <Route path='coffees/:id' element={<CoffeeDetailPage cart={cart} setCart={setCart}/>}></Route>
       <Route path="dashboard" element={
             <ProtectedRoute
