@@ -42,6 +42,10 @@ function handleSetCoffeeDetail(newDetail){
   setCoffees(updatedCoffees)
 };
 
+function onDeletedCoffee(deletedCoffee){
+  setCoffees(coffees.filter(coffee => coffee.id !== deletedCoffee.id))
+}
+
 
 function handleSetCoffees(newCoffee){
   setCoffees([...coffees, newCoffee]);
@@ -49,7 +53,7 @@ function handleSetCoffees(newCoffee){
 
   return (
     <div className="App">
-      <NavBar cart={cart}/>
+      <NavBar cart={cart} setCart={setCart}/>
       <Routes>
       <Route index element={<Home coffees={coffees}/> }></Route>
       <Route path='home' element={<Home coffees={coffees}/>}></Route>
@@ -65,7 +69,7 @@ function handleSetCoffees(newCoffee){
             <ProtectedRoute
               redirectPath="/home"
               isAllowed={!!isAdmin}>
-              <Dashboard coffees={coffees}/>
+              <Dashboard coffees={coffees} onDeletedCoffee={onDeletedCoffee}/>
             </ProtectedRoute>}/>
       <Route path="coffees/:id/edit" element={
             <ProtectedRoute

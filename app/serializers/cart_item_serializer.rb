@@ -1,5 +1,5 @@
 class CartItemSerializer < ActiveModel::Serializer
-  attributes :id, :quantity, :total_cost, :item_summary
+  attributes :id, :quantity, :item_price, :item_summary
   belongs_to :coffee
 
   
@@ -11,5 +11,9 @@ class CartItemSerializer < ActiveModel::Serializer
       image: coffee.image,
       description: coffee.description
     }
+  end
+
+  def item_price
+    self.object.coffee.price
   end
 end
