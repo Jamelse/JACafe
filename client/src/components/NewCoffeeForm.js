@@ -84,7 +84,7 @@ function NewCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail}){
         .then((coffee_detail) => { 
           handleSetCoffeeDetail(coffee_detail)
           setCoffeeCreated(false)
-          navigate('/dashboard')})
+          navigate('/dashboard/products')})
       } else {
         r.json()
         .then((err) => setErrors(err.errors));

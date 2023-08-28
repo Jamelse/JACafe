@@ -1,15 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:ital@1&family=Noto+Sans:wght@700&family=Pacifico&display=swap');
+
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Gentium Book Plus', serif;
+  font-family: 'Noto Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #EEEEEE;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'Gentium Book Plus', serif;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.homeImg {
+  border-radius: 75%;
+}
+.cartNavCart {
+  width: 500px;
+  padding: 20px;
+}
+
+.cartItemContainer {
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .coffeeDisplay {
@@ -33,4 +49,56 @@ code {
 .cartItemImg {
   height: 50px;
   width: 50px;
+}
+
+.side-menu .MuiMenuItem-root{
+  padding: 1em;
+  margin-bottom: 1em;
+  
+}
+
+.side-menu .MuiMenuItem-root.active {
+  background-color: rgba(0, 0, 0, 0.04);
+  font-weight: bold;
+}
+
+.side-menu .MuiMenuItem-root a {
+  text-decoration: none;
+}
+
+@media (min-width: 900px) {
+  .side-menu {
+      justify-content: 'stretch';
+  }
+
+  .side-menu .MuiPaper-root{
+      height: 100%;
+  }
+
+}
+
+  .carousel-card.MuiPaper-root {
+      background-color: transparent;
+  }
+
+.MuiGrid-root.carousel-card-container {
+    max-width: 300px;
+    margin: auto;
+}
+
+.background-box {
+  position: absolute;
+  width: 35%;
+  height: 100vh;
+  max-height: 800px;
+  top: 0;
+  z-index: -1;
+}
+
+.background-box.right {
+  right: 0;
+}
+
+.logo {
+  max-width: 150px;
 }

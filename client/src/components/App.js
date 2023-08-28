@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useContext} from 'react';
 import { UserContext } from './UserProvider';
 import {Route, Routes} from 'react-router-dom';
-import NavBar from './NavBar';
+import AppContainer from './AppContainer';
 import ProtectedRoute from './ProtectedRoute';
 import LoginSignUpPage from './LoginSignUpPage';
 import Home from './Home';
 import EditCoffeeForm from  './EditCoffeeForm'
 import Dashboard from './Dashboard';
+import DashboardContent from './DashboardContent';
 import CoffeeDetailPage from './CoffeeDetailPage';
 import NewCoffeeForm from './NewCoffeeForm';
 import Cart from './Cart';
 import Checkout from './Checkout';
+
 
 function App() {
 const {user, isAdmin} = useContext(UserContext);
@@ -54,44 +56,59 @@ function handleSetCoffees(newCoffee){
 
   return (
     <div className="App">
-      <NavBar cart={cart} setCart={setCart}/>
-      <Routes>
-      <Route index element={<Home coffees={coffees}/> }></Route>
-      <Route path='home' element={<Home coffees={coffees}/>}></Route>
-      <Route path='login' element={ 
-            <ProtectedRoute
-              redirectPath="/home"
-              isAllowed={!user}>
-              <LoginSignUpPage />
-            </ProtectedRoute>}/>
-      <Route path='checkout' element={ 
-            <ProtectedRoute
-              redirectPath="/login"
-              isAllowed={user && !isAdmin}>
-              <Checkout />
-            </ProtectedRoute>}/>
-      <Route path='cart' element={<Cart cart={cart} setCart={setCart}/>}/>
-      <Route path='coffees/:id' element={<CoffeeDetailPage cart={cart} setCart={setCart}/>}></Route>
-      <Route path="dashboard" element={
-            <ProtectedRoute
-              redirectPath="/home"
-              isAllowed={!!isAdmin}>
-              <Dashboard coffees={coffees} onDeletedCoffee={onDeletedCoffee}/>
-            </ProtectedRoute>}/>
-      <Route path="coffees/:id/edit" element={
-            <ProtectedRoute
-              redirectPath="/home"
-              isAllowed={!!isAdmin}>
-              <EditCoffeeForm  handleSetCoffees={handleUpdateCoffees} handleSetCoffeeDetail={handleSetCoffeeDetail}/>
-            </ProtectedRoute>}/>
-      <Route path="coffees/new" element={
-            <ProtectedRoute
-              redirectPath="/home"
-              isAllowed={!!isAdmin}>
-              <NewCoffeeForm handleSetCoffees={handleSetCoffees} handleSetCoffeeDetail={handleSetCoffeeDetail}/>
-            </ProtectedRoute>}/>
-        <Route path="*" element={<p>There's nothing here: 404!</p>} />
-    </Routes>
+      <AppContainer cart={cart} setCart={setCart}>
+        <Routes>
+        <Route index element={<Home coffees={coffees}/> }></Route>
+        <Route path='home' element={<Home coffees={coffees}/>}></Route>
+        <Route path='login' element={ 
+              <ProtectedRoute
+                redirectPath="/home"
+                isAllowed={!user}>
+                <LoginSignUpPage />
+              </ProtectedRoute>}/>
+        <Route path='checkout' element={ 
+              <ProtectedRoute
+                redirectPath="/login"
+                isAllowed={user && !isAdmin}>
+                <Checkout />
+              </ProtectedRoute>}/>
+        <Route path='cart' element={<Cart cart={cart} setCart={setCart}/>}/>
+        <Route path='coffees/:id' element={<CoffeeDetailPage cart={cart} setCart={setCart}/>}></Route>
+        <Route path="dashboard" element={
+              <ProtectedRoute
+                redirectPath="/home"
+                isAllowed={!!isAdmin}>
+                <Dashboard />
+              </ProtectedRoute>}>
+              <Route path='products' element={
+                  <ProtectedRoute
+                    redirectPath="/home"
+                    isAllowed={!!isAdmin}>
+                  <DashboardContent header='Products' coffees={coffees} onDeletedCoffee={onDeletedCoffee}/>
+                </ProtectedRoute>}/>
+                <Route path='orders' element={
+                  <ProtectedRoute
+                    redirectPath="/home"
+                    isAllowed={!!isAdmin}>
+                  <DashboardContent header='Orders' coffees={coffees} onDeletedCoffee={onDeletedCoffee}/>
+                </ProtectedRoute>}/>
+              </Route>
+        
+        <Route path="coffees/:id/edit" element={
+              <ProtectedRoute
+                redirectPath="/home"
+                isAllowed={!!isAdmin}>
+                <EditCoffeeForm  handleSetCoffees={handleUpdateCoffees} handleSetCoffeeDetail={handleSetCoffeeDetail}/>
+              </ProtectedRoute>}/>
+        <Route path="coffees/new" element={
+              <ProtectedRoute
+                redirectPath="/home"
+                isAllowed={!!isAdmin}>
+                <NewCoffeeForm handleSetCoffees={handleSetCoffees} handleSetCoffeeDetail={handleSetCoffeeDetail}/>
+              </ProtectedRoute>}/>
+          <Route path="*" element={<p>There's nothing here: 404!</p>} />
+      </Routes>
+    </AppContainer>
     </div>
   );
 }

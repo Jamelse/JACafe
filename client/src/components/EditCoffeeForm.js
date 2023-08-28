@@ -48,7 +48,7 @@ function EditCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail }){
         r.json()
         .then(updatedCoffee => {
           handleSetCoffees(updatedCoffee)
-          navigate("/dashboard")})
+          navigate("/dashboard/products")})
       } else {
         r.json()
         .then((err) => setErrors(err.errors));
@@ -71,7 +71,7 @@ function EditCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail }){
         r.json()
         .then(updatedDetail => {
           handleSetCoffeeDetail(updatedDetail)
-          navigate("/dashboard")})
+          navigate("/dashboard/products")})
       } else {
         r.json()
         .then((err) => setErrors(err.errors));

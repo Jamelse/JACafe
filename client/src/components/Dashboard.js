@@ -1,33 +1,33 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { Grid, Container } from '@mui/material'
+import AdNav from "./AdNav";
 
-function Dashboard({coffees, onDeletedCoffee}){
-  const navigate = useNavigate();
+function Dashboard(){
+  
 
-  function coffeeDeleteHandler(coffee){
-    fetch(`/coffees/${coffee.id}`, {
-      method: 'DELETE'
-    })
-    .then((r) => {
-      if (r.ok) {
-        onDeletedCoffee(coffee)
-      }
-    })
-  }
+  
+  
 
   return (
-    <div>
-      <button onClick={() => navigate('/coffees/new')}>Add Coffee</button>
-      {coffees ? coffees.map((coffee) => {
-        return (
-          <div key={coffee.id}>
-            <p>{coffee.name}</p>
-            <button onClick={() => navigate(`/coffees/${coffee.id}/edit`)}>Edit</button>
-            <button onClick={() => coffeeDeleteHandler(coffee)}>Delete</button>
-          </div>
-        )
-      }) : <h1>Loading...</h1>}
-    </div>
+    <Container maxWidth='xl'>
+      <Grid container className='profile-container' justifyContent='stretch'>
+          <Grid item className='profile-menu' xs={12} md={4} lg={3}>
+            <AdNav />
+          </Grid>
+          <Grid
+            item
+            container
+            flexDirection='column'
+            spacing={3}
+            xs={12}
+            md={8}
+            lg={9}
+            sx={{ p: 4 }}>
+              <Outlet />
+          </Grid>
+        </Grid>
+  </Container>
   );
 }
 
