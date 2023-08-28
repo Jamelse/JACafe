@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :update, :create]
   get '/user_orders', to: 'orders#user_orders'
   resources :coffees
+  get '/hot_coffees', to: 'coffees#hot_coffees'
+  get '/cold_coffees', to: 'coffees#cold_coffees'
   resources :coffee_details, only: [:create, :update]
   resources :users, only: [:show, :create, :update]
   post '/signup', to: 'users#create'

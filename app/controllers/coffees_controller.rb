@@ -1,7 +1,6 @@
 class CoffeesController < ApplicationController
-  skip_before_action :authorize_user, only: :create
   before_action :find_coffee, only: [:show, :update, :destroy]
-  before_action :admin_authorization, only: [:update, :destroy]
+  before_action :admin_authorization, only: [:create, :update, :destroy]
 
   def index
     render json: Coffee.all
@@ -23,6 +22,16 @@ class CoffeesController < ApplicationController
   def destroy
     @coffee.destroy
     render json: {}
+  end
+
+  def hot_coffees 
+    hot_Coffee = Coffee.all.filter{ |cafe| cafe.hot? }
+    render json: hot_Coffee
+  end
+
+  def cold_coffees
+    cold_coffee = Coffee.all.filter { |cafe| !cafe.hot? }
+    render json: cold_coffee
   end
 
   private
