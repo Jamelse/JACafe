@@ -16,7 +16,8 @@ code {
 }
 
 .homeImg {
-  border-radius: 75%;
+  border-radius: 50%;
+  object-fit: cover;
 }
 .cartNavCart {
   width: 500px;
@@ -28,28 +29,11 @@ code {
   margin-bottom: 40px;
 }
 
-.coffeeDisplay {
-  width: fit-content;
+.cartNavItems{
+  max-height: 1000px;
+  overflow-y: scroll;
 }
 
-.coffeeDisplay:hover {
-  cursor: pointer;
-}
-
-.cartPreviewDiv{
-  display: flex;
-  flex-direction: column;
-}
-
-.cartItemDiv {
-  display: flex;
-  flex-direction: row;
-}
-
-.cartItemImg {
-  height: 50px;
-  width: 50px;
-}
 
 .side-menu .MuiMenuItem-root{
   padding: 1em;
@@ -86,6 +70,17 @@ code {
     margin: auto;
 }
 
+.carousel-card-img {
+  height: 300px;
+  width: 300px;
+}
+
+
+.MuiGrid-root.card-container {
+  max-width: 300px;
+  margin: auto;
+}
+
 .background-box {
   position: absolute;
   width: 35%;
@@ -101,4 +96,88 @@ code {
 
 .logo {
   max-width: 150px;
+}
+
+.adNavLink {
+  color: #EEEEEE;
+}
+
+.coffeeDetailImg {
+  width: 100%;
+}
+
+.coffeeDetailPrice {
+  position: relative;
+}
+
+.MuiButton-root.btn {
+  min-width: 200px;
+  padding: 10px;
+  font-weight: bold;
+}
+.MuiButton-root.MuiButton-outlinedInfo.btn:hover,
+.MuiButton-root.MuiButton-outlinedInfo.btn:active {
+  background-color: rgb(41 17 8 / 36%);
+}
+
+.MuiButton-root.btn.btn-lg {
+  position: fixed;
+  transform: none;
+  right: 0;
+  z-index: 1;
+  min-width: 300px;
+  padding: 18px;
+  border-radius: 500px;
+  margin: 10px;
+}
+
+.MuiButton-root.btn.btn-lg.btn-100 {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .MuiButton-root.btn.btn-lg.btn-checkout {
+    min-width: 100%;
+  }
+}
+
+.MuiButtonGroup-root .btn {
+  padding: 20px;
+  min-width: 50%;
+}
+
+.detailImgContainer{
+  width: 100%;
+}
+
+.coffeeDetailImg {
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.coffeeDetailName{
+  padding-bottom: 1.6rem;
+}
+
+.coffeeDetailCalories {
+  color: hsla(0,0%,100%,.7)
+}
+
+.coffeeDetailPrice {
+  padding-top: 1.6rem;
+}
+
+.cartItemContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.cartCardImg {
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
 }

@@ -24,7 +24,12 @@ function AdProd({coffees, onDeletedCoffee}){
                   <Button
                     variant='contained'
                     className='btn b-radius'
-                    color='info'
+                    sx={{ backgroundColor: '#B79163',
+                    color: '#fff',
+                    '&:hover': {
+                      backgroundColor: '#fff',
+                      color: '#B79163',
+                  },}}
                     onClick={() => navigate('/coffees/new')}>
                     Add A Product
                   </Button>

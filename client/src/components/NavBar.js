@@ -7,7 +7,7 @@ import NavMenu from './NavMenu';
 import NavUserMenu from './NavUserMenu';
 import NavLogin from './NavLogin';
 
-function NavBar({cart, setCart}){
+function NavBar(){
   const {user, setUser, isAdmin, setIsAdmin} = useContext(UserContext);
   const navigate = useNavigate();
   
@@ -53,20 +53,12 @@ function NavBar({cart, setCart}){
               : <NavUserMenu handleLogout={handleLogout}/>}
             </Grid>
             <Grid item xs='auto'>
-              {!isAdmin && <CartNav cart={cart} setCart={setCart}/>}
+              {!isAdmin && <CartNav/>}
             </Grid>
           </Grid>
         </Grid>
       </Toolbar>
     </AppBar>
-  
-    // <div className='navDiv'> 
-    //   <ul>
-    //     <li className='appTitle'><NavLink className='appNavTitle' to="/home">JACafe</NavLink></li>
-    //     <li className='dropDownList'>{!user ? <NavLink to='/login'>Login/Sign-Up</NavLink>: <NavLink onClick={handleLogout} to='/login' className='dropDownItems'>Logout</NavLink>}</li>
-    //     <li>{isAdmin ? <NavLink to="/dashboard/products">Admin Dashboard</NavLink> : <CartNav cart={cart} setCart={setCart}/>}</li>
-    //   </ul>
-    // </div>
   )
 }
 

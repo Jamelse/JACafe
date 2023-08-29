@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import { Menu, MenuItem, Button } from '@mui/material'
+import { useNavigate } from "react-router-dom";
 
 function NavMenu(){
   const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -31,8 +33,14 @@ function NavMenu(){
         onClose={handleClose}
         MenuListProps={{
           'aria-labelledby': 'basic-button',}}>
-        <MenuItem onClick={handleClose}>Hot Coffees</MenuItem>
-        <MenuItem onClick={handleClose}>Cold Coffees</MenuItem>
+        <MenuItem onClick={() => {
+          handleClose();
+          navigate('/menu/hot-coffees')
+        }}>Hot Coffees</MenuItem>
+        <MenuItem onClick={() => {
+          handleClose();
+          navigate('/menu/cold-coffees')
+        }}>Cold Coffees</MenuItem>
       </Menu>
       </>
   )

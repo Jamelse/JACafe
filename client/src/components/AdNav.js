@@ -15,13 +15,13 @@ function AdNav(){
             className={
               location.pathname === '/dashboard/products' ? 'active' : null } 
               onClick={() => navigate('/dashboard/products')}>
-            <Link to='/dashboard/products'>Products</Link>
+            <Link to='/dashboard/products' className='adNavLink'>Products</Link>
           </MenuItem>
           <MenuItem
             className={
               location.pathname === '/dashboard/orders' ? 'active' : null }
               onClick={() => navigate('/dashboard/orders')}>
-            <Link to='/dashboard/orders'>Orders</Link>
+            <Link to='/dashboard/orders' className='adNavLink'>Orders</Link>
           </MenuItem>
         </MenuList>
     </Paper>

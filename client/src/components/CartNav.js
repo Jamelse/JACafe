@@ -1,15 +1,15 @@
-import React, {useState} from "react";
+import React, {useContext} from "react";
+import { CartContext } from './CartProvider';
 import { useNavigate } from "react-router-dom";
 import { IconButton, Badge, Grid, Typography, Drawer, Card, CardMedia, CardContent, Select, MenuItem, Button} from '@mui/material'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 import Divider from '@mui/material/Divider';
 
-function CartNav({cart, setCart}){
-  const [dropDown, setDropDown] = useState(false);
+function CartNav(){
+  const {cart, setCart, cartOpen, setCartOpen} = useContext(CartContext)
   const navigate = useNavigate();
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  
   
   function handleChange(e) {
     fetch(`/carts/${e.target.name}/new_quantity`, {
@@ -41,29 +41,45 @@ function CartNav({cart, setCart}){
 
   return (
     <>
-    <Grid item xs='auto'>
+      <Grid item xs='auto'>
             <IconButton size='large' aria-label='cart' color='inherit' 
-             id="basic-button"
-             aria-controls={open ? 'basic-menu' : undefined}
-             aria-haspopup="true"
-             aria-expanded={open ? 'true' : undefined}
-             onClick={() => setDropDown(true)}>
-              <Badge
-                badgeContent={cart && cart.cart_items ? cart.cart_items.map(item => item.quantity).reduce((a, b)=> a + b, 0) : 0}
-                sx={{
-                  '& .MuiBadge-badge': {
-                    backgroundColor: '#b47a43',
-                    color: 'white'}}}>
-                <ShoppingCartOutlinedIcon />
-              </Badge>
+              id="basic-button"
+              aria-controls={cartOpen ? 'basic-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={cartOpen ? 'true' : undefined}
+              onClick={() => setCartOpen(true)}>
+                <Badge
+                  badgeContent={cart && cart.cart_items ? cart.cart_items.map(item => item.quantity).reduce((a, b)=> a + b, 0) : 0}
+                  sx={{
+                    '& .MuiBadge-badge': {
+                      backgroundColor: '#b47a43',
+                      color: 'white'}}}>
+                  <ShoppingCartOutlinedIcon />
+                </Badge>
             </IconButton>
           </Grid>
-          <Drawer anchor="right" disableScrollLock={true} open={dropDown} onClose={() => setDropDown(false)}>
+          <Drawer anchor="right" disableScrollLock={true} open={cartOpen} onClose={() => setCartOpen(false)}>
+            <Grid container alignItems='flex-end' sx={{backgroundColor: '#363738', color: 'white'}}>
+              <Grid item container justifyContent='flex-end'flexWrap='nowrap'>
+                <Grid item>
+                <IconButton size='large' aria-label='cart' color='inherit' id="basic-button"aria-haspopup="true" onClick={() => setCartOpen(false)}>
+                    <Badge
+                      badgeContent={cart && cart.cart_items ? cart.cart_items.map(item => item.quantity).reduce((a, b)=> a + b, 0) : 0}
+                      sx={{
+                        '& .MuiBadge-badge': {
+                          backgroundColor: '#b47a43',
+                          color: 'white'}}}>
+                      <ShoppingCartOutlinedIcon />
+                    </Badge>
+                </IconButton>
+                </Grid>
+              </Grid>
+            </Grid>
             <Grid container className="cartItemContainer" justifyContent="center" alignItems="center">
               <Grid item textAlign="center">
                 <Typography variant="h4">Subtotal</Typography>
                 <h2>${cart.cart_total}</h2>
-                <Button variant="outlined" color="inherit" onClick={() => { setDropDown(false)
+                <Button variant="outlined" color="inherit" onClick={() => { setCartOpen(false)
                   navigate('/cart')}}>Go to Cart</Button>
               </Grid>
             </Grid>
@@ -71,8 +87,9 @@ function CartNav({cart, setCart}){
             <Grid item>
               <Typography variant="h2">No items in your cart.</Typography>
             </Grid> : null}
-      {cart.cart_items.map((item) => (
-        <Grid item >
+            <Grid item className="cartNavItems">
+            {cart.cart_items.map((item) => (
+        <Grid item key={item.id}>
           <Divider sx={{ my: 0.5 }} />
           <Card className='cartNavCart'sx={{ maxWidth: 500 }} >
                 <CardMedia
@@ -95,44 +112,12 @@ function CartNav({cart, setCart}){
                     <DeleteOutlinedIcon sx={{ color: '#000' }} fontSize="inherit" />
                   </IconButton>
                 </CardContent>
-              </Card>
+            </Card>
+          </Grid>
+          ))}
         </Grid>
-      ))}
-          </Drawer>
-        </>
-    // <div className="cartPreviewDiv">
-    //   <p onClick={() => setDropDown(!dropDown)}>Cart{cart && cart.cart_items ? 
-    //   cart.cart_items.map(item => item.quantity).reduce((a, b)=> a + b, 0) : 0}{ !dropDown ? <span>&#x25BE;</span> : <span>&#x25b4;</span>}</p>
-    //       { dropDown ? 
-    //       <ul className="dropdown">
-    //         <li><h3>Subtotal</h3></li>
-    //         <li>${cart.cart_total}</li>
-    //         <button onClick={() => {navigate('/cart')
-    //           setDropDown(false)}}>Go to Cart</button>
-    //         {cart && cart.cart_items ? cart.cart_items.map(item => {
-    //           return (
-    //             <div className="cartItemDiv" key={item.id}>
-    //               <li>
-    //                 <img className="cartItemImg" src={item.item_summary.image}/>
-    //                 <p>{item.item_summary.name}</p>
-    //                 <p>${item.item_price}</p>
-    //                 <select 
-    //                   name={item.id}
-    //                   onChange={handleChange}
-    //                   value={item.quantity}>
-    //                   <option value='1'>1</option>
-    //                   <option value='2'>2</option>
-    //                   <option value='3'>3</option>
-    //                   <option value='4'>4</option>
-    //                   <option value='5'>5</option>
-    //                 </select>  
-    //                 <button onClick={() => navCartDelete(item.id)}>Delete</button>
-    //               </li>
-    //             </div>
-    //           )
-    //         }) : <li>Cart is empty!</li>}
-    //       </ul> : null}
-    // </div>
+      </Drawer>
+  </>
   )
 }
 

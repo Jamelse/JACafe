@@ -72,9 +72,6 @@ function NavUserMenu({handleLogout}){
           <MenuItem onClick={() => {
             handleClose()
             navigate(`/user/${user.id}/orders`)}}>My Orders</MenuItem>
-          <MenuItem onClick={() => {
-            handleClose()
-            navigate(`/user/${user.id}/profile/edit`)}}>Edit Profile</MenuItem>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
       </>}

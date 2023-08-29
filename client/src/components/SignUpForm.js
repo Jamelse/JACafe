@@ -1,8 +1,10 @@
 import React, { useState, useContext } from 'react';
+import { Button, Avatar, TextField, Paper, Box, Grid, Typography } from '@mui/material'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from './UserProvider';
 
-function SignUpForm(){
+function SignUpForm({setHasAccount}){
   const {setUser, setIsAdmin} = useContext(UserContext);
   const [signUpData, setSignUpData] = useState({
     first_name: '',
@@ -45,35 +47,102 @@ function SignUpForm(){
       }
     });
   };
+
+  
     
   return (
-    <div className='loginSignUpContainer'>
-      <div className="errorsDiv">
-      {errors.map(error => {
-        return (
-         <p className="errorMessage" key={error}><span className="material-icons">priority_high</span>{error}</p>
-        )
-      })}
-    </div>
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Email: <input className="loginSignUpInput" type="email"  name="email" value={signUpData.email} onChange={handleChange} autoComplete="off"/></label>  
-      </div>
-      <div>
-        <label>Password: <input className="loginSignUpInput" type="password" name="password" value={signUpData.password} onChange={handleChange} /></label>    
-      </div>
-      <div>
-        <label>Confirm Password: <input className="loginSignUpInput" type="password" name="password_confirmation" value={signUpData.password_confirmation} onChange={handleChange} /></label>
-      </div>
-      <div>
-        <label>First Name: <input className="loginSignUpInput" type="text" name="first_name" value={signUpData.first_name} onChange={handleChange} autoComplete="off"/></label>     
-      </div>
-      <div>
-        <label>Last Name: <input className="loginSignUpInput" type="text" name="last_name" value={signUpData.last_name} onChange={handleChange} /></label> 
-      </div>
-      <button type="submit">Sign Up</button>
-    </form>
-    </div>
+    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}>
+            <Avatar sx={{ m: 1, bgcolor: 'black' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign up
+            </Typography>
+            <Box component="form" noValidate  onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                  <TextField
+                    autoComplete="given-name"
+                    name="first_name"
+                    required
+                    fullWidth
+                    label="First Name"
+                    autoFocus
+                    value={signUpData.first_name} 
+                    onChange={handleChange}/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    label="Last Name"
+                    name="last_name"
+                    autoComplete="family-name"
+                    value={signUpData.last_name} 
+                    onChange={handleChange}/>
+                </Grid>
+              </Grid>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                label="Email Address"
+                name="email"
+                autoComplete="off"
+                value={signUpData.email} 
+                onChange={handleChange}/>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                autoComplete="current-password"
+                value={signUpData.password} 
+                onChange={handleChange}/>
+                <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password_confirmation"
+                label="Confirm Password"
+                type="password"
+                autoComplete="off"
+                value={signUpData.password_confirmation} 
+                onChange={handleChange}/>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2, backgroundColor: '#b47a43',
+                color: '#fff',
+                '&:hover': {
+                  backgroundColor: '#A56F3D',
+                  color: '#F0F3F4',
+              }}}>
+                Sign Up
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                </Grid>
+                <Grid item>
+                  <Typography onClick={() => setHasAccount(true)} variant="body2" sx={{color: 'black', textDecoration: 'none', '&:hover': {textDecoration: 'underline', cursor: 'pointer'}}}>
+                    {"Already have an account? Sign in"}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Grid>
   );
 };
 
