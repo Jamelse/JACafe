@@ -65,6 +65,8 @@ gem 'bcrypt'
 
 gem "active_model_serializers", "~> 0.10.12"
 
+gem 'dotenv-rails'
+
 gem 'stripe'
 
 gem 'net-http'

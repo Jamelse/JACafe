@@ -1,12 +1,12 @@
 import React, {useContext} from "react";
 import { CartContext } from "./CartProvider";
 import { useNavigate } from "react-router-dom";
-import { IconButton, Grid, Typography, Card, CardMedia, CardContent, Select, MenuItem, Button} from '@mui/material'
+import { IconButton, Grid, Typography, Card, CardMedia, CardContent, Select, MenuItem, Button, imageListClasses} from '@mui/material'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import Divider from '@mui/material/Divider';
 
 function Cart(){
-  const {cart, setCart} = useContext(CartContext)
+  const {cart, setCart, user, isAdmin} = useContext(CartContext);
   const navigate = useNavigate();
 
   function handleChange(e) {
@@ -32,6 +32,21 @@ function Cart(){
     })
     .then(r => r.json())
     .then(updatedCart => setCart(updatedCart))
+  };
+console.log(cart?.cart_items.map(item => item))
+  function handleCartCheckout(){
+    const cart_itemIds = cart?.cart_items.map(item => item.id)
+    fetch('/checkout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        items: cart_itemIds,
+      })
+    })
+    .then(r => r.json())
+    .then(url => window.location = url.url)
   }
 
   if (!cart) return <h1>Loading...</h1>
@@ -42,14 +57,14 @@ function Cart(){
                 <Typography variant="h4">Subtotal</Typography>
                 <h3>{`(${cart.cart_items.map(item => item.quantity).reduce((a, b)=> a + b, 0)} items)`}</h3>
                 <h2>${cart.cart_total}</h2>
-                <Button variant='contained'
+                {!!cart.cart_items.length > 0 && <Button variant='contained'
                   color='info'
                   sx={{ backgroundColor: '#b47a43',
                     color: '#fff',
                     '&:hover': {
                       backgroundColor: '#A56F3D',
                       color: '#F0F3F4',},}}
-                  onClick={() => navigate('/checkout')}>Proceed to checkout</Button>
+                  onClick={() => user && isAdmin ? handleCartCheckout : navigate('/login')}>Proceed to checkout</Button>}
               </Grid>
             </Grid>
       { cart.cart_items.length > 0 ? cart.cart_items.map((item) => (

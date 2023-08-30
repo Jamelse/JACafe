@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   get '/cart', to: 'carts#show'
   patch '/carts/:id/new_quantity', to: 'carts#new_quantity'
   patch '/carts/:id/delete_item', to: 'carts#delete_item'
-  delete '/reset-cart', to: 'carts#reset_cart'
+  post "/checkout", to: "stripe#checkout"
+  post "/order-success", to: "stripe#order_success"
   resources :orders, only: [:index, :update, :create]
   get '/user_orders', to: 'orders#user_orders'
   resources :coffees

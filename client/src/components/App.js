@@ -72,7 +72,12 @@ function handleSetCoffees(newCoffee){
                   <ProtectedRoute
                     redirectPath="/login"
                     isAllowed={user && !isAdmin}>
-                    <Checkout />
+                  </ProtectedRoute>}/>
+            <Route path='order-confirmation' element={ 
+                  <ProtectedRoute
+                    redirectPath="/login"
+                    isAllowed={user && !isAdmin}>
+                  <Checkout />
                   </ProtectedRoute>}/>
             <Route path='cart' element={<Cart />}/>
             <Route path='coffees/:id' element={<CoffeeDetailPage/>}></Route>

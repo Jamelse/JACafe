@@ -16,13 +16,7 @@ class OrdersController < ApplicationController
     render json: @order, status: :accepted
   end
 
-  def create 
-    new_order = @current_user.orders.create!(order_params)
-    cart = Cart.find_by(id: session[:cart_id])
-    cart.update!(order_id: new_order.id)
-    render json: new_order, status: :created
-  end
-
+  
   private 
 
   def find_order 
@@ -30,7 +24,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.permit(:status, :date, :cart_id)
+    params.permit(:status, :date, :total)
   end
 
   def admin_authorization
