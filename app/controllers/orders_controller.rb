@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
   end
 
   def user_orders
-    orders = @current_user.orders.all
+    orders = @current_user.orders.all.order(:created_at)
     render json: orders
   end
 

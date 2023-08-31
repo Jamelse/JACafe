@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post "/checkout", to: "stripe#checkout"
   post "/order-success", to: "stripe#order_success"
   resources :orders, only: [:index, :update, :create]
-  get '/user_orders', to: 'orders#user_orders'
+  get '/user/:id/orders', to: 'orders#user_orders'
   resources :coffees
   get '/hot_coffees', to: 'coffees#hot_coffees'
   get '/cold_coffees', to: 'coffees#cold_coffees'

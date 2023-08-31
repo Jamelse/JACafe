@@ -24,6 +24,15 @@ code {
   padding: 20px;
 }
 
+.navLogo {
+  height: 50x;
+  width: 50px;
+}
+
+.navLogo:hover {
+  cursor: pointer;
+}
+
 .cartItemContainer {
   margin-top: 40px;
   margin-bottom: 40px;
