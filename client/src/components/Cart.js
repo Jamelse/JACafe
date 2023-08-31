@@ -1,12 +1,14 @@
 import React, {useContext} from "react";
 import { CartContext } from "./CartProvider";
+import { UserContext } from "./UserProvider";
 import { useNavigate } from "react-router-dom";
 import { IconButton, Grid, Typography, Card, CardMedia, CardContent, Select, MenuItem, Button, imageListClasses} from '@mui/material'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import Divider from '@mui/material/Divider';
 
 function Cart(){
-  const {cart, setCart, user, isAdmin} = useContext(CartContext);
+  const {cart, setCart} = useContext(CartContext);
+  const {user, isAdmin} = useContext(UserContext);
   const navigate = useNavigate();
 
   function handleChange(e) {
@@ -33,9 +35,9 @@ function Cart(){
     .then(r => r.json())
     .then(updatedCart => setCart(updatedCart))
   };
-console.log(cart?.cart_items.map(item => item))
+
   function handleCartCheckout(){
-    const cart_itemIds = cart?.cart_items.map(item => item.id)
+    const cart_itemIds = cart?.cart_items.map(item => item.id);
     fetch('/checkout', {
       method: 'POST',
       headers: {
@@ -48,12 +50,12 @@ console.log(cart?.cart_items.map(item => item))
     .then(r => r.json())
     .then(url => window.location = url.url)
   }
-
+  console.log(cart)
   if (!cart) return <h1>Loading...</h1>
   return (
     <>
-    <Grid container className="cartItemContainer" justifyContent="center" alignItems="center">
-              <Grid item textAlign="center">
+    <Grid container className="cartItemContainer" justifyContent="center" alignItems="center" sx={{backgroundColor: "#363738" , color: 'white'}}>
+              <Grid item textAlign="center" >
                 <Typography variant="h4">Subtotal</Typography>
                 <h3>{`(${cart.cart_items.map(item => item.quantity).reduce((a, b)=> a + b, 0)} items)`}</h3>
                 <h2>${cart.cart_total}</h2>
@@ -64,13 +66,12 @@ console.log(cart?.cart_items.map(item => item))
                     '&:hover': {
                       backgroundColor: '#A56F3D',
                       color: '#F0F3F4',},}}
-                  onClick={() => user && isAdmin ? handleCartCheckout : navigate('/login')}>Proceed to checkout</Button>}
+                      onClick={() => !!user && !isAdmin ? handleCartCheckout() : navigate('/login')}>Proceed to checkout</Button>}
               </Grid>
             </Grid>
       { cart.cart_items.length > 0 ? cart.cart_items.map((item) => (
-        <Grid item key={item.id}  lg={2}  className="cartItemContainer">
-          <Divider sx={{ my: 0.5 }} />
-          <Card className='cartNavCart'sx={{ width: 300, height: 300 }} >
+        <Grid item container key={item.id}  lg={2}  className="cartItemContainer">
+          <Card className='cartNavCart'sx={{ width: 300, height: 300, backgroundColor: '#b47a43', color: 'white' }} >
                 <CardMedia
                   className="cartCardImg"
                   component="img"
@@ -81,7 +82,7 @@ console.log(cart?.cart_items.map(item => item))
                     {item.item_summary.name}
                   </Typography>
                   <h3>$ {item.item_price}</h3>
-                  <Select value={item.quantity} onChange={handleChange} autoWidth name={item.id}>  
+                  <Select value={item.quantity} onChange={handleChange} autoWidth name={item.id} sx={{color: 'white'}}>  
                     <MenuItem value={1}>1</MenuItem>
                     <MenuItem value={2}>2</MenuItem>
                     <MenuItem value={3}>3</MenuItem>
@@ -89,7 +90,7 @@ console.log(cart?.cart_items.map(item => item))
                     <MenuItem value={5}>5</MenuItem>
                   </Select>
                   <IconButton aria-label="delete" size="large" onClick={() => handleCartDelete(item.id)}>
-                    <DeleteOutlinedIcon sx={{ color: '#000' }} fontSize="inherit" />
+                    <DeleteOutlinedIcon sx={{ color: 'white' }} fontSize="inherit" />
                   </IconButton>
                 </CardContent>
             </Card>

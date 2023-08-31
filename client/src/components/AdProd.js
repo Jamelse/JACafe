@@ -8,7 +8,7 @@ function AdProd({coffees, onDeletedCoffee}){
   const navigate = useNavigate();
 
   const columns = [
-    { field: 'id', headerName: 'Product #', width: 100 },
+    { field: 'id', headerName: 'Product #', width: 200 },
     { field: 'name', headerName: 'Product', width: 250 },
     {
       field: 'actions',
@@ -19,11 +19,10 @@ function AdProd({coffees, onDeletedCoffee}){
   ]
 
   return (
-    <Grid item container flexDirection='column' wrap='nowrap' spacing={3}>
-                <Grid item textAlign='right' xs={12}>
+      <Grid item container flexDirection='column' wrap='nowrap' spacing={3}>
+        <Grid item textAlign='right' xs={12}>
                   <Button
                     variant='contained'
-                    className='btn b-radius'
                     sx={{ backgroundColor: '#B79163',
                     color: '#fff',
                     '&:hover': {
@@ -43,8 +42,8 @@ function AdProd({coffees, onDeletedCoffee}){
                     <Grid item flexGrow={1}>
                       <DataGrid rows={coffees} columns={columns} />
                     </Grid>
-                </Grid>
-            </Grid>
+                </Grid>        
+      </Grid>
   )
 }
 

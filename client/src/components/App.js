@@ -73,12 +73,7 @@ function handleSetCoffees(newCoffee){
                     redirectPath="/login"
                     isAllowed={user && !isAdmin}>
                   </ProtectedRoute>}/>
-            <Route path='order-confirmation' element={ 
-                  <ProtectedRoute
-                    redirectPath="/login"
-                    isAllowed={user && !isAdmin}>
-                  <Checkout />
-                  </ProtectedRoute>}/>
+            <Route path='order-confirmation' element={ <Checkout /> }/>
             <Route path='cart' element={<Cart />}/>
             <Route path='coffees/:id' element={<CoffeeDetailPage/>}></Route>
             <Route path="dashboard" element={
@@ -97,7 +92,7 @@ function handleSetCoffees(newCoffee){
                       <ProtectedRoute
                         redirectPath="/home"
                         isAllowed={!!isAdmin}>
-                      <DashboardContent header='Orders' coffees={coffees} onDeletedCoffee={onDeletedCoffee}/>
+                      <DashboardContent header='Orders'/>
                     </ProtectedRoute>}/>
                   </Route>
             <Route path="coffees/:id/edit" element={

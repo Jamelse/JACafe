@@ -6,9 +6,6 @@ import AdNav from "./AdNav";
 function Dashboard(){
   
 
-  
-  
-
   return (
     <Container maxWidth='xl'>
       <Grid container className='profile-container' justifyContent='stretch'>

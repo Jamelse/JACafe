@@ -181,3 +181,16 @@ code {
   height: 150px;
   object-fit: cover;
 }
+
+.img-responsive {
+  width: 100%;
+}
+
+.form {
+  text-align: center;
+  padding: 2em;
+}
+
+.completed {
+  color: 'green';
+}

@@ -1,7 +1,7 @@
 class CartItemSerializer < ActiveModel::Serializer
-  attributes :id, :quantity, :item_price, :item_summary
+  attributes :id, :quantity, :item_price, :item_summary, :order_id
   belongs_to :coffee
-
+  
   
   def item_summary
     coffee = self.object.coffee

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function ProdButtons({coffee, onDeletedCoffee}){
   const navigate = useNavigate();
 
-  function coffeeDeleteHandler(coffee){
+  function coffeeDeleteHandler(){
     fetch(`/coffees/${coffee.id}`, {
       method: 'DELETE'
     })

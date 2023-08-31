@@ -3,7 +3,7 @@ class CartsController < ApplicationController
 
   def show 
     if session.include? :cart_id
-      set_cart
+      @cart = Cart.find_by(id: session[:cart_id])
     else
       @cart = Cart.create!
       session[:cart_id] = @cart.id

@@ -12,7 +12,7 @@ class StripeController < ApplicationController
               product_data: {
                   name: cart_item.coffee.name,
               },
-              unit_amount: cart_item.coffee.price.to_i * 100
+                unit_amount: cart_item.coffee.price.to_i * 100
 
           },
           quantity: cart_item.quantity,
@@ -24,7 +24,7 @@ class StripeController < ApplicationController
       line_items: orderItems,
       payment_method_types: ['card'],
       mode: 'payment',
-      success_url:  "#{ENV['WEBSITE_URL']}order-confirmation",
+      success_url:  "#{ENV['WEBSITE_URL']}/order-confirmation?session_id={CHECKOUT_SESSION_ID}",
       cancel_url:    ENV["WEBSITE_URL"]
       })
 
@@ -47,10 +47,8 @@ class StripeController < ApplicationController
 
   def create_order
     session = Stripe::Checkout::Session.retrieve(params[:session_id])
-    customer = Stripe::Customer.retrieve(session.customer)
-    @current_user.update!(stripe_id: customer.id)
     @order = @current_user.orders.create!(
-      date: DateTime.now.strftime('%m/%d/%Y'),
+      date: DateTime.current.to_date,
       total: session.amount_total / 100,
       status: 'Processing'
     )
