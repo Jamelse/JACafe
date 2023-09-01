@@ -13,7 +13,7 @@ function SignUpForm({setHasAccount}){
     password: '',
     password_confirmation: ''
   });
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
   
   function handleChange(e) {
@@ -27,7 +27,7 @@ function SignUpForm({setHasAccount}){
 
   function handleSubmit(e){
     e.preventDefault();
-    setErrors([]);
+    setErrors(null);
     fetch("/signup", {
       method: "POST",
       headers: {
@@ -48,7 +48,11 @@ function SignUpForm({setHasAccount}){
     });
   };
 
-  
+  function errorHandle(name){
+    const newError = errors?.filter(error => error.toLowerCase().includes(name) ? error : null)
+      
+    return newError
+  }
     
   return (
     <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -70,6 +74,8 @@ function SignUpForm({setHasAccount}){
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                   <TextField
+                    error={Boolean(errorHandle("first"))} 
+                    helperText={errorHandle("first")}
                     autoComplete="given-name"
                     name="first_name"
                     required
@@ -81,6 +87,8 @@ function SignUpForm({setHasAccount}){
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    error={Boolean(errorHandle("last"))} 
+                    helperText={errorHandle("last")}
                     required
                     fullWidth
                     label="Last Name"
@@ -91,6 +99,8 @@ function SignUpForm({setHasAccount}){
                 </Grid>
               </Grid>
               <TextField
+                error={Boolean(errorHandle("email"))} 
+                helperText={errorHandle("email")}
                 margin="normal"
                 required
                 fullWidth
@@ -100,6 +110,8 @@ function SignUpForm({setHasAccount}){
                 value={signUpData.email} 
                 onChange={handleChange}/>
               <TextField
+                error={Boolean(errorHandle("password"))} 
+                helperText={errorHandle("password")}
                 margin="normal"
                 required
                 fullWidth
@@ -110,6 +122,8 @@ function SignUpForm({setHasAccount}){
                 value={signUpData.password} 
                 onChange={handleChange}/>
                 <TextField
+                error={Boolean(errorHandle("password"))} 
+                helperText={errorHandle("password")}
                 margin="normal"
                 required
                 fullWidth

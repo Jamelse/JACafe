@@ -6,25 +6,25 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
- User.create(
-  first_name: 'Admin',
-  last_name: 'Account',
-  email: 'admin@jacafe.com',
-  password: '123',
-  password_confirmation: '123',
-  isAdmin: true
-);
+#  User.create(
+#   first_name: 'Admin',
+#   last_name: 'Account',
+#   email: 'admin@jacafe.com',
+#   password: '123',
+#   password_confirmation: '123',
+#   isAdmin: true
+# );
 
 
 
-User.create(
-  first_name: 'Customer',
-  last_name: 'User',
-  email: 'user@jacafe.com',
-  password: '123',
-  password_confirmation: '123',
-  isAdmin: false
-)
+# User.create(
+#   first_name: 'Customer',
+#   last_name: 'User',
+#   email: 'user@jacafe.com',
+#   password: '123',
+#   password_confirmation: '123',
+#   isAdmin: false
+# )
 
 Coffee.create!([
   {

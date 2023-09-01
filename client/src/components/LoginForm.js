@@ -10,7 +10,7 @@ function LoginForm({ setHasAccount }){
     email: '',
     password: ''
   })
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
 
   function handleChange(e) {
@@ -23,7 +23,7 @@ function LoginForm({ setHasAccount }){
 
   function handleSubmit(e){
     e.preventDefault();
-    setErrors([]);
+    setErrors(null);
     fetch("/login", {
       method: "POST",
       headers: {
@@ -45,7 +45,7 @@ function LoginForm({ setHasAccount }){
       }
     });
   }
-
+  
   return (
     <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
@@ -64,6 +64,8 @@ function LoginForm({ setHasAccount }){
             </Typography>
             <Box component="form" noValidate  onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
+                error={Boolean(errors)} 
+                helperText={errors}
                 margin="normal"
                 required
                 fullWidth
@@ -76,6 +78,8 @@ function LoginForm({ setHasAccount }){
                 onChange={handleChange}
               />
               <TextField
+                error={Boolean(errors)} 
+                helperText={errors}
                 margin="normal"
                 required
                 fullWidth

@@ -2,9 +2,8 @@ import React, {useContext} from "react";
 import { CartContext } from "./CartProvider";
 import { UserContext } from "./UserProvider";
 import { useNavigate } from "react-router-dom";
-import { IconButton, Grid, Typography, Card, CardMedia, CardContent, Select, MenuItem, Button, imageListClasses} from '@mui/material'
+import { IconButton, Grid, Typography, Card, CardMedia, CardContent, Select, MenuItem, Button} from '@mui/material'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import Divider from '@mui/material/Divider';
 
 function Cart(){
   const {cart, setCart} = useContext(CartContext);

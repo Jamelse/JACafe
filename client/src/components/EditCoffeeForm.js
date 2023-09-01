@@ -38,7 +38,7 @@ function EditCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail }){
 
   function handleEditCoffeeSubmit(e){
     e.preventDefault();
-    setErrors([]);
+    setErrors(null);
     fetch(`/coffees/${id}`, {
       method: "PATCH",
       headers: {
@@ -61,7 +61,7 @@ function EditCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail }){
 
   function handleEditCoffeeDetailSubmit(e){
     e.preventDefault();
-    setErrors([]);
+    setErrors(null);
     fetch(`/coffee_details/${coffeeInfo.coffee_detail.id}`, {
       method: "PATCH",
       headers: {
@@ -80,6 +80,12 @@ function EditCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail }){
         .then((err) => setErrors(err.errors));
       }
     });
+  };
+
+  function errorHandle(name){
+    const newError = errors?.filter(error => error.toLowerCase().includes(name) ? error : null)
+      
+    return newError
   };
 
   return (
@@ -101,6 +107,8 @@ function EditCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail }){
           <Box component="form" noValidate  onSubmit={handleEditCoffeeSubmit} sx={{ mt: 1 }}>
             <Grid container spacing={2}>
               <TextField
+                error={Boolean(errorHandle("name"))} 
+                helperText={errorHandle("name")}
                 value={coffeeInfo.name}
                 onChange={handleChange}
                 margin="normal"
@@ -111,6 +119,8 @@ function EditCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail }){
                 fullWidth/>
 
               <TextField
+                error={Boolean(errorHandle("image"))} 
+                helperText={errorHandle("image")}
                 value={coffeeInfo.image}
                 onChange={handleChange}
                 margin="normal"
@@ -122,6 +132,8 @@ function EditCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail }){
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    error={Boolean(errorHandle("calories"))} 
+                    helperText={errorHandle("calories")}
                     value={coffeeInfo.calories}
                     onChange={handleChange}
                     margin="normal"
@@ -133,6 +145,8 @@ function EditCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail }){
                 </Grid> 
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    error={Boolean(errorHandle("price"))} 
+                    helperText={errorHandle("price")}
                     value={coffeeInfo.price}
                     onChange={handleChange}
                     margin="normal"
@@ -144,6 +158,8 @@ function EditCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail }){
                 </Grid>
               </Grid>
               <TextField
+                error={Boolean(errorHandle("description"))} 
+                helperText={errorHandle("description")}
                 value={coffeeInfo.description}
                 onChange={handleChange}
                 margin="normal"
@@ -212,6 +228,8 @@ function EditCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail }){
                 </Grid>
               </Grid>
               <TextField
+                error={Boolean(errorHandle("syrup"))} 
+                helperText={errorHandle("syrup")}
                 value={coffeeDetails.syrup}
                 onChange={handleCoffeeDetailChange}
                 margin="normal"

@@ -6,7 +6,6 @@ import HomeSlider from "./HomeSlider";
 
 function Home({ coffees }){
   
-  console.log(coffees?.slice(1).slice(-3))
   return (
     <>
     <Container maxWidth='xl'>
@@ -28,28 +27,14 @@ function Home({ coffees }){
         </Grid>
       </Grid>
     </Grid>
-
-    <Grid item xs={12} md={6} lg={4} sx={{ order: { xs: -1, md: 1 } }} textAlign='center'>
-      <img src={homeCoffeeImg} role='presentation' style={{ maxWidth: 700 }} className="homeImg"/>
+      <Grid item xs={12} md={6} lg={4} sx={{ order: { xs: -1, md: 1 } }} textAlign='center'>
+        <img src={homeCoffeeImg} alt="Latte Heart" style={{ maxWidth: 700 }} className="homeImg"/>
+      </Grid>
+      <Box sx={{ backgroundColor: '#363738' }} className='background-box right'/>
     </Grid>
-    <Box sx={{ backgroundColor: '#363738' }} className='background-box right'/>
-  </Grid>
   </Container>
   <HomeSlider coffees={coffees}/>
  </>
-  //  <div>
-  //      {coffees ? coffees.map(coffee => {
-  //       return (
-  //         <div key={coffee.id}>
-  //           <div className="coffeeDisplay" onClick={() => navigate(`/coffees/${coffee.id}`)}>
-  //           <p>*coffee image*</p> 
-  //           <p>{coffee.name}</p>
-  //           <p>{coffee.price}</p>
-  //           </div>
-  //           </div>)
-  //      }
-  //       ) : "Loading.."} 
-  //  </div>
   );
 }
 

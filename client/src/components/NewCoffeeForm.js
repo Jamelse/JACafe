@@ -22,7 +22,7 @@ function NewCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail}){
     syrup: '',
     syrup_pumps: '0'
   });
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(null);
 
   function handleCoffeeChange(e) {
     const key = e.target.name
@@ -42,7 +42,7 @@ function NewCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail}){
 
   function handleCoffeeSubmit(e){
     e.preventDefault();
-    setErrors([]);
+    setErrors(null);
     fetch("/coffees", {
       method: "POST",
       headers: {
@@ -73,7 +73,7 @@ function NewCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail}){
 
   function handleCoffeeDetailSubmit(e){
     e.preventDefault();
-    setErrors([]);
+    setErrors(null);
     fetch("/coffee_details", {
       method: "POST",
       headers: {
@@ -94,6 +94,12 @@ function NewCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail}){
       }
     })
   }
+  
+  function errorHandle(name){
+    const newError = errors?.filter(error => error.toLowerCase().includes(name) ? error : null)
+      
+    return newError
+  };
 
   return (
 
@@ -114,6 +120,8 @@ function NewCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail}){
           <Box component="form" noValidate  onSubmit={handleCoffeeSubmit} sx={{ mt: 1 }}>
             <Grid container spacing={2}>
               <TextField
+                error={Boolean(errorHandle("name"))} 
+                helperText={errorHandle("name")}
                 value={coffeeInfo.name}
                 onChange={handleCoffeeChange}
                 margin="normal"
@@ -124,6 +132,8 @@ function NewCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail}){
                 fullWidth/>
 
               <TextField
+                error={Boolean(errorHandle("image"))} 
+                helperText={errorHandle("image")}
                 value={coffeeInfo.image}
                 onChange={handleCoffeeChange}
                 margin="normal"
@@ -135,6 +145,8 @@ function NewCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail}){
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    error={Boolean(errorHandle("calories"))} 
+                    helperText={errorHandle("calories")}
                     value={coffeeInfo.calories}
                     onChange={handleCoffeeChange}
                     margin="normal"
@@ -146,6 +158,8 @@ function NewCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail}){
                 </Grid> 
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    error={Boolean(errorHandle("price"))} 
+                    helperText={errorHandle("price")}
                     value={coffeeInfo.price}
                     onChange={handleCoffeeChange}
                     margin="normal"
@@ -157,6 +171,8 @@ function NewCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail}){
                 </Grid>
               </Grid>
               <TextField
+                error={Boolean(errorHandle("description"))} 
+                helperText={errorHandle("description")}
                 value={coffeeInfo.description}
                 onChange={handleCoffeeChange}
                 margin="normal"
@@ -225,8 +241,8 @@ function NewCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail}){
                 </Grid>
               </Grid>
               <TextField
-                value={coffeeDetails.syrup}
-                onChange={handleCoffeeDetailChange}
+                error={Boolean(errorHandle("syrup"))} 
+                helperText={errorHandle("syrup")}
                 margin="normal"
                 name="syrup"
                 label='Syrup'
@@ -282,100 +298,6 @@ function NewCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail}){
         </Box>
       </Grid>
     </Grid>
-    // <div>
-    //   {!coffeeCreated ? 
-    //   <div>
-    //     <form className="editForm" onSubmit={handleCoffeeSubmit}>
-    //   <div>
-    //     <label>Name: <input className="formInput" type="text"  name="name"  autoComplete="off" value={coffeeInfo.name} onChange={handleCoffeeChange}/></label>  
-    //   </div>
-    //   <div>
-    //     <label>Description: <input className="formInput" type="text"  name="description"  value={coffeeInfo.description} onChange={handleCoffeeChange}/></label>      
-    //   </div>
-    //   <div>
-    //     <label>Image: <input className="formInput" type="text"  name="image"  value={coffeeInfo.image} onChange={handleCoffeeChange}/></label> 
-    //   </div>
-    //   <div>
-    //     <label>Price: <input className="formInput" type="text"  name="price"  value={coffeeInfo.price} onChange={handleCoffeeChange}/></label> 
-    //   </div>
-    //   <div>
-    //     <label>Calories: <input className="formInput" type="text"  name="calories"  value={Number(coffeeInfo.calories)} onChange={handleCoffeeChange}/></label> 
-    //   </div>
-    //   <div>
-    //     <label>Hot or Cold:
-    //       <select 
-    //         onChange={handleCoffeeChange}
-    //         value={coffeeInfo.hot} 
-    //         name="hot">
-    //           <option value={Boolean(true)}>Hot</option>
-    //           <option value={Boolean(false)}>Cold</option>
-    //       </select> 
-    //     </label>
-    //   </div>
-    //   <button type="submit">Create Coffee</button>
-    //   </form>
-    //   <button className="cancelButton" onClick={() => navigate(-1)}>Cancel</button>
-    //   </div> 
-    //   : 
-    //   <div>
-    //     <form className="editForm" onSubmit={handleCoffeeDetailSubmit}>
-    //   <div>
-    //     <label>Espresso Shots:
-    //       <select 
-    //         onChange={handleCoffeeDetailChange}
-    //         value={coffeeDetails.espresso_shots} 
-    //         name="espresso_shots">
-    //           <option value='0'>0</option>
-    //           <option value='1'>1</option>
-    //           <option value='2'>2</option>
-    //           <option value='3'>3</option>
-    //           <option value='4'>4</option>
-    //           <option value='5'>5</option>
-    //       </select> 
-    //     </label>
-    //   </div>
-    //   <div>
-    //     <label>Milk:
-    //       <select 
-    //         onChange={handleCoffeeDetailChange}
-    //         value={coffeeDetails.milk} 
-    //         name="milk">
-    //           <option value='No'>None</option>
-    //           <option value='2%'>2% Milk</option>
-    //           <option value='Fat-free'>Fat-free Milk</option>
-    //           <option value='Whole'>Whole Milk</option>
-    //           <option value='Almond'>Almond Milk</option>
-    //           <option value='Oat'>Oat Milk</option>
-    //           <option value='Soy'>Soy Milk</option>
-    //           <option value='Coconut'>Coconut Milk</option>
-    //       </select>
-    //     </label>      
-    //   </div>
-    //   <div>
-    //     <label>Syrup: <input className="formInput" type="text"  name="syrup"  value={coffeeDetails.syrup} onChange={handleCoffeeDetailChange}/></label>      
-    //   </div>
-    //   <div>
-    //     <label>Syrup Pumps:
-    //       <select 
-    //         onChange={handleCoffeeDetailChange}
-    //         value={coffeeDetails.syrup_pumps} 
-    //         name="syrup_pumps">
-    //           <option value='0'>0</option>
-    //           <option value='1'>1</option>
-    //           <option value='2'>2</option>
-    //           <option value='3'>3</option>
-    //           <option value='4'>4</option>
-    //           <option value='5'>5</option>
-    //       </select> 
-    //     </label> 
-    //   </div>
-    //   <button type="submit">Create Details</button>
-    //   </form>
-    //   <button className="noDetailButton" onClick={() => {
-    //     setCoffeeCreated(false)
-    //     navigate('/dashboard/products')}}>No Details</button>
-    //   </div>}
-    // </div>
   )
 }
 
