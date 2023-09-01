@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import {useNavigate } from 'react-router-dom';
-import { Grid, Toolbar, AppBar, Button } from '@mui/material'
+import { Grid, Toolbar, AppBar } from '@mui/material'
 import JACafeLogo from '../images/JACafeLogo.png'
 import { UserContext } from './UserProvider';
 import CartNav from './CartNav';
@@ -27,14 +27,11 @@ function NavBar(){
   
   return(
    
-    <AppBar
-      position='fixed'
-      sx={{ color: 'text.primary',
-      backgroundColor: '#ffff' }}>
+    <AppBar position='fixed' sx={{ color: 'text.primary', backgroundColor: '#ffff' }}>
       <Toolbar>
         <Grid container spacing={2} alignItems='flex-end' >
           <Grid item  textAlign='center' sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
-            <img onClick={() => navigate('/home')} src={JACafeLogo} className='navLogo'/> 
+            <img onClick={() => navigate('/home')} src={JACafeLogo} alt='logo' className='navLogo'/> 
           </Grid>
           <Grid item xs={4} md={6} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
             {!isAdmin && <NavMenu />}

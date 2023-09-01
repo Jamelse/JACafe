@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import { useNavigate } from 'react-router-dom';
 import { TextField, Grid, Button, Typography, Select, MenuItem, FormControl, InputLabel, Paper, Box} from '@mui/material';
-import CircularProgress from '@mui/material/CircularProgress';
 import newCoffeeImg from '../images/newCoffeeImg.jpg'
 
 function NewCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail}){

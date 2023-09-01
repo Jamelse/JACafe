@@ -33,8 +33,7 @@ function UserOrders(){
               <Grid item key={order.id}>
                 <OrderDetails order={order}/>
               </Grid>
-            )
-          })}
+          )})}
         </Grid>
       </Grid>
     </Grid>

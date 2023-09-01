@@ -70,9 +70,9 @@ code {
 
 }
 
-  .carousel-card.MuiPaper-root {
-      background-color: transparent;
-  }
+.carousel-card.MuiPaper-root {
+    background-color: transparent;
+}
 
 .MuiGrid-root.carousel-card-container {
     max-width: 300px;

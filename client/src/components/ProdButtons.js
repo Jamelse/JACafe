@@ -17,30 +17,28 @@ function ProdButtons({coffee, onDeletedCoffee}){
     })
   }
 
-
   return (
     <Grid container alignItems='center' justifyContent='center' spacing={1}>
-    <Grid item>
-      <Button
-        variant='outlined'
-        className='btn b-radius'
-        color='info'
-        onClick={() => navigate(`/coffees/${coffee.id}/edit`)}>
-        Edit
-      </Button>
+      <Grid item>
+        <Button
+          variant='outlined'
+          className='btn b-radius'
+          color='info'
+          onClick={() => navigate(`/coffees/${coffee.id}/edit`)}>
+          Edit
+        </Button>
+      </Grid>
+      <Grid item>
+        <Tooltip title='Delete Product'>
+          <IconButton
+            aria-label='delete'
+            color='error'
+            onClick={coffeeDeleteHandler}>
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
+      </Grid>
     </Grid>
-    <Grid item>
-      <Tooltip title='Delete Product'>
-        <IconButton
-          aria-label='delete'
-          color='error'
-          onClick={coffeeDeleteHandler}>
-          <DeleteIcon />
-        </IconButton>
-      </Tooltip>
-    </Grid>
-  </Grid>
-
   )
 
 }

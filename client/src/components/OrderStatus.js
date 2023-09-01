@@ -5,19 +5,19 @@ function OrderStatus({ order, handleSetOrderStatus}){
 
   function handleChange(e) {
     fetch(`/orders/${order.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        status: e.target.value
-      }),
-    })
-    .then(r => r.json())
-    .then(updatedOrder => handleSetOrderStatus(updatedOrder))
-  };
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          status: e.target.value
+        }),
+      })
+      .then(r => r.json())
+      .then(updatedOrder => handleSetOrderStatus(updatedOrder))
+    };
 
-  const statusColor = order.status == 'Completed' ? 'green' : 'black'
+  const statusColor = order.status === 'Completed' ? 'green' : 'black'
 
   return (
     <>

@@ -21,29 +21,28 @@ function AdProd({coffees, onDeletedCoffee}){
   return (
       <Grid item container flexDirection='column' wrap='nowrap' spacing={3}>
         <Grid item textAlign='right' xs={12}>
-                  <Button
-                    variant='contained'
-                    sx={{ backgroundColor: '#B79163',
-                    color: '#fff',
-                    '&:hover': {
-                      backgroundColor: '#fff',
-                      color: '#B79163',
-                  },}}
-                    onClick={() => navigate('/coffees/new')}>
-                    Add A Product
-                  </Button>
-                </Grid>
-
-                <Grid
-                  item
-                  container
-                  sx={{ height: '100%', width: '100%', minHeight: 600 }}
-                  xs={12}>
-                    <Grid item flexGrow={1}>
-                      <DataGrid rows={coffees} columns={columns} />
-                    </Grid>
-                </Grid>        
-      </Grid>
+          <Button
+          variant='contained'
+          sx={{ backgroundColor: '#B79163',
+          color: '#fff',
+          '&:hover': {
+            backgroundColor: '#fff',
+            color: '#B79163',
+          },}}
+          onClick={() => navigate('/coffees/new')}>
+          Add A Product
+          </Button>
+        </Grid>
+        <Grid
+        item
+        container
+        sx={{ height: '100%', width: '100%', minHeight: 600 }}
+        xs={12}>
+          <Grid item flexGrow={1}>
+            <DataGrid rows={coffees} columns={columns} />
+        </Grid>
+      </Grid>        
+    </Grid>
   )
 }
 

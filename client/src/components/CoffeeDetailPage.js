@@ -3,14 +3,11 @@ import { CartContext } from "./CartProvider";
 import { Typography, Grid, Button,Container, Chip } from '@mui/material'
 import Divider from '@mui/material/Divider';
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
 function CoffeeDetailPage(){
   const {cart, setCart, setCartOpen} = useContext(CartContext);
   const {id} = useParams();
-  const navigate = useNavigate();
   const [coffeeInfo, setCoffeeInfo] = useState(null);
-  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     fetch(`/coffees/${id}`)
@@ -39,7 +36,7 @@ function CoffeeDetailPage(){
           setCartOpen(true)})
       } else {
         r.json()
-        .then((err) => setErrors(err.errors));
+        .then((err) => console.log(err.errors));
       }
    });
   }
@@ -51,21 +48,21 @@ function CoffeeDetailPage(){
         variant='contained'
         className='btn btn-lg btn-checkout'
         color='info'
-        sx={{ backgroundColor: '#b47a43',
-                    color: '#fff',
-                    '&:hover': {
-                      backgroundColor: '#A56F3D',
-                      color: '#F0F3F4',
-                  },}}>
+        sx={{ 
+          backgroundColor: '#b47a43',
+          color: '#fff',
+          '&:hover': {
+            backgroundColor: '#A56F3D',
+            color: '#F0F3F4',},}}>
         Add To Cart
       </Button>
-  {coffeeInfo ?
+    {coffeeInfo ?
       <>
         <Grid item container sx={{ color: 'white', backgroundColor: '#363738', alignItems: 'center', display: 'flex'}}>
           <Container>
             <Grid item container>
               <Grid item sx={{marginRight: '88px', marginLeft:"0px"}}>
-                <img src={coffeeInfo.image} className="coffeeDetailImg"/>
+                <img src={coffeeInfo.image} alt={coffeeInfo.name} className="coffeeDetailImg"/>
               </Grid> 
               <Grid item sx={{marginLeft: '88px', marginRight:"0px"}}>
                 <Typography variant='h2' className="coffeeDetailName">{coffeeInfo.name}</Typography>
@@ -109,10 +106,10 @@ function CoffeeDetailPage(){
             </Grid>
           </Container>
         </Grid>
-      <Grid item xs={2}>
-        <Typography variant='h5' component='p' className='coffeeDetailPrice'></Typography>
-      </Grid> </>
-      : <h1>Loading..</h1>}
+        <Grid item xs={2}>
+          <Typography variant='h5' component='p' className='coffeeDetailPrice'></Typography>
+        </Grid> </>
+      :<h1>Loading..</h1>}
     </>
   )
 }
