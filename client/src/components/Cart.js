@@ -73,7 +73,7 @@ function Cart(){
         </Grid>
       {cart.cart_items.length > 0 ? cart.cart_items.map((item) => (
         <Grid item container key={item.id}  lg={2}  className="cartItemContainer">
-          <Card className='cartNavCart'sx={{ width: 300, height: 300, backgroundColor: '#b47a43', color: 'white' }} >
+          <Card className='cartNavCart'sx={{ width: 300, height: 350, backgroundColor: '#b47a43', color: 'white' }} >
             <CardMedia
             className="cartCardImg"
             component="img"

@@ -99,8 +99,9 @@ function NewCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail}){
       
     return newError
   };
-
+console.log(coffeeDetails)
   return (
+
 
     <Grid container justifyContent='center'>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square justifyContent='center'>
@@ -240,6 +241,8 @@ function NewCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail}){
                 </Grid>
               </Grid>
               <TextField
+                onChange={handleCoffeeDetailChange} 
+                value={coffeeDetails.syrup}
                 error={Boolean(errorHandle("syrup"))} 
                 helperText={errorHandle("syrup")}
                 margin="normal"

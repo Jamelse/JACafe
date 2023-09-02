@@ -10,7 +10,7 @@ function EditCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail }){
   const [coffeeInfo, setCoffeeInfo] = useState(null);
   const [coffeeDetails, setCoffeeDetails] = useState(null);
   const [active, setActive] = useState(true);
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(null);
 
   useEffect(() => {
     fetch(`/coffees/${id}`)
@@ -58,7 +58,8 @@ function EditCoffeeForm({ handleSetCoffees, handleSetCoffeeDetail }){
       }
     });
   };
-
+  
+  console.log(errors)
   function handleEditCoffeeDetailSubmit(e){
     e.preventDefault();
     setErrors(null);

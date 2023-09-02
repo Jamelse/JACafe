@@ -75,7 +75,7 @@ function CoffeeDetailPage(){
         </Grid>
         <Grid item container sx={{alignItems: 'center', display: 'flex'}}>
           <Container>
-            <Grid item container>
+            <Grid item container pt={5}>
               <Grid item sx={{marginRight: '88px', marginLeft:"0px", maxWidth:"420px"}}>
                 <Typography variant='h4' gutterBottom>Description</Typography>
                 <Divider />

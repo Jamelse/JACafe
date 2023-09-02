@@ -7,5 +7,5 @@ class Coffee < ApplicationRecord
   validates :calories, presence: true, numericality:  { greater_than_or_equal_to: 0 }
   validates :price, presence: true, numericality:  { greater_than_or_equal_to: 0 }
   validates :image, presence: true 
-  validates :hot, presence: true
+ 
 end
