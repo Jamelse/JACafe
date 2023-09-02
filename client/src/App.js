@@ -1,23 +1,23 @@
 import React, { useState, useEffect, useContext} from 'react';
-import { UserContext } from './UserProvider';
-import { CartProvider } from './CartProvider';
+import { UserContext } from './components/providers/UserProvider';
+import { CartProvider } from './components/providers/CartProvider';
 import {Route, Routes} from 'react-router-dom';
-import AppContainer from './AppContainer';
-import ProtectedRoute from './ProtectedRoute';
-import LoginSignUpPage from './LoginSignUpPage';
-import Home from './Home';
-import EditCoffeeForm from  './EditCoffeeForm'
-import Dashboard from './Dashboard';
-import DashboardContent from './DashboardContent';
-import CoffeeDetailPage from './CoffeeDetailPage';
-import NewCoffeeForm from './NewCoffeeForm';
-import Cart from './Cart';
-import Checkout from './Checkout';
-import HotCoffeesPage from './HotCoffeesPage';
-import ColdCoffeesPage from './ColdCoffeesPage';
-import UserOrders from './UserOrders';
+import AppContainer from './components/AppContainer';
+import ProtectedRoute from './components/ProtectedRoute';
+import LoginSignUpPage from './components/LoginSignUpPage';
+import Home from './components/Home';
+import EditCoffeeForm from './components/forms/EditCoffeeForm';
+import Dashboard from './components/admin/Dashboard';
+import DashboardContent from './components/admin/DashboardContent';
+import CoffeeDetailPage from './components/CoffeeDetailPage';
+import NewCoffeeForm from './components/forms/NewCoffeeForm';
+import Cart from './components/Cart';
+import Checkout from './components/Checkout';
+import HotCoffeesPage from './components/HotCoffeesPage';
+import ColdCoffeesPage from './components/ColdCoffeesPage';
+import UserOrders from './components/UserOrders';
 import { ThemeProvider, createTheme } from '@mui/material/styles'
-import theme from '../theme';
+import theme from './theme';
 import CssBaseline from '@mui/material/CssBaseline'
 
 

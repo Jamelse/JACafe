@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext }from "react";
-import { CartContext } from "./CartProvider";
+import { CartContext } from "./providers/CartProvider";
 import { Typography, Grid, Button,Container, Chip } from '@mui/material'
 import Divider from '@mui/material/Divider';
 import { useParams } from "react-router-dom";

@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { Grid, Container } from '@mui/material'
-import AdNav from "./AdNav";
+import AdNav from "../nav/AdNav";
 
 function Dashboard(){
   

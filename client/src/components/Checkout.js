@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useContext} from "react";
-import { UserContext } from "./UserProvider";
-import { CartContext } from "./CartProvider";
+import { UserContext } from "./providers/UserProvider";
+import { CartContext } from "./providers/CartProvider";
 import { Grid, Typography, Container, Button } from '@mui/material'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useNavigate } from "react-router-dom";
@@ -29,7 +29,7 @@ function Checkout(){
       },
       body: JSON.stringify({
         session_id,
-       items,
+        items,
       })
     })
     .then(r => r.json())

@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from "react";
-import { UserContext} from "./UserProvider";
+import { UserContext} from "./providers/UserProvider";
 import { Grid, Typography } from '@mui/material'
 import OrderDetails from "./OrderDetails";
 

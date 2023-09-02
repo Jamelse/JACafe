@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import {useNavigate } from 'react-router-dom';
 import { Grid, Toolbar, AppBar } from '@mui/material'
-import JACafeLogo from '../images/JACafeLogo.png'
-import { UserContext } from './UserProvider';
+import JACafeLogo from '../../images/JACafeLogo.png'
+import { UserContext } from '../providers/UserProvider';
 import CartNav from './CartNav';
 import NavMenu from './NavMenu';
 import NavUserMenu from './NavUserMenu';

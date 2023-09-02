@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react";
-import { UserContext } from "./UserProvider";
+import { UserContext } from "../providers/UserProvider";
 import { useNavigate } from "react-router-dom";
 import { Menu, MenuItem, IconButton, Typography } from '@mui/material'
 import PersonIcon from '@mui/icons-material/Person';

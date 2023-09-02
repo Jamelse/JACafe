@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Button, Avatar, TextField, Paper, Box, Grid, Typography } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from './UserProvider';
+import { UserContext } from '../providers/UserProvider';
 
 function SignUpForm({setHasAccount}){
   const {setUser, setIsAdmin} = useContext(UserContext);

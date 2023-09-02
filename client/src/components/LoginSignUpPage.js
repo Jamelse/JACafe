@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Grid} from '@mui/material'
 import loginDefault from '../images/loginDefault.jpg'
-import LoginForm from './LoginForm';
-import SignUpForm from './SignUpForm';
+import LoginForm from './forms/LoginForm';
+import SignUpForm from './forms/SignUpForm';
 
 
 function LoginSignUpPage(){

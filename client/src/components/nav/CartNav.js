@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import { CartContext } from './CartProvider';
+import { CartContext } from '../providers/CartProvider';
 import { useNavigate } from "react-router-dom";
 import { IconButton, Badge, Grid, Typography, Drawer, Card, CardMedia, CardContent, Select, MenuItem, Button} from '@mui/material'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';

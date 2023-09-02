@@ -1,8 +1,8 @@
 import React, {useContext} from "react";
 import { Grid } from '@mui/material'
-import NavBar from "./NavBar";
-import Footer from "./Footer";
-import { UserContext } from './UserProvider';
+import NavBar from "./nav/NavBar";
+import Footer from "./nav/Footer";
+import { UserContext } from './providers/UserProvider';
 
 function AppContainer({children}){
   const {isAdmin} = useContext(UserContext);
