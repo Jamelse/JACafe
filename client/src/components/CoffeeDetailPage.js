@@ -61,10 +61,10 @@ function CoffeeDetailPage(){
         <Grid item container sx={{ color: 'white', backgroundColor: '#363738', alignItems: 'center', display: 'flex'}}>
           <Container>
             <Grid item container>
-              <Grid item sx={{marginRight: '88px', marginLeft:"0px"}}>
+              <Grid item sx={{marginRight: '88px', marginLeft:"0px"}} pt={3} pb={3}>
                 <img src={coffeeInfo.image} alt={coffeeInfo.name} className="coffeeDetailImg"/>
               </Grid> 
-              <Grid item sx={{marginLeft: '88px', marginRight:"0px"}}>
+              <Grid item sx={{marginLeft: '88px', marginRight:"0px"}} pt={3} pb={3}>
                 <Typography variant='h2' className="coffeeDetailName">{coffeeInfo.name}</Typography>
                 <Typography variant='h4' gutterBottom className="coffeeDetailCalories">{coffeeInfo.calories} calories</Typography>
                 <Divider color='#EEEEE'/>
